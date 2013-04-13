@@ -1,8 +1,7 @@
 # Grupo
-- 123456 David Martinho
-- 123456 David Martinho
-- 123456 David Martinho
-- 123456 David Martinho
+- 21104693 Bruno Sousa
+- 21100079 Luís Marques
+
 
 ## Changelog
 #### Versão 1.0:
