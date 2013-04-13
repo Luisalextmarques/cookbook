@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recipes</title>
+${css}
+<title>${titulo} - ${autor}</title>
 </head>
+
+
 <body>
+	<div id="logo" class="container">
+		<h1><a href="#">${titulo}</a></h1>
+		<p>${autor}</p>
+	</div>
 <ul>
 <c:forEach var="item" items='${items}'>
 	<li><c:out value="${item}"></c:out></li>

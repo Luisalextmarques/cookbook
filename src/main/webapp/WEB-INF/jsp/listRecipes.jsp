@@ -4,13 +4,42 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recipes</title>
+${css}
+<title>${titulo} - ${autor}</title>
 </head>
+
+
 <body>
-<ul>
-<c:forEach var="item" items='${items}'>
-	<li><c:out value="${item}"></c:out></li>
-</c:forEach>
-</ul>
+	<div id="logo" class="container">
+		<h1><a href="#">${titulo}</a></h1>
+		<p>${autor}</p>
+	</div>
+		<div id="menu-wrapper">
+			<div id="menu" class="container">
+				<ul>
+					<li class="current_page_item"><a href="#">Home</a></li>
+					<li><a href="recipes">Lista Receitas</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Photos</a></li>
+					<li><a href="#">About Us</a></li>
+					<li><a href="#">Links</a></li>
+					<li><a href="#">Contact Us</a></li>
+				</ul>
+			</div>
+		</div>
+<div id="page" class="container">
+		<div id="content">
+			<div class="post">
+				<h2 class="title"><a href="#">Receitas</a></h2>
+				<ul>
+					<c:forEach var="item" items='${items}'>
+						<li><c:out value="${item}"></c:out></li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div style="clear: both;">&nbsp;</div>
+		</div>		
+</div>
+
 </body>
 </html>

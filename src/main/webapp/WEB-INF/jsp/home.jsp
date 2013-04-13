@@ -3,9 +3,32 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Homepage</title>
+${css}
+<title>${titulo} - ${autor}</title>
 </head>
+
+
 <body>
-	It works! This page was rendered on ${currentTime}
+	<div id="logo" class="container">
+		<h1><a href="#">${titulo}</a></h1>
+		<p>${autor}</p>
+	</div>
+
+	<div id="menu-wrapper">
+		<div id="menu" class="container">
+			<ul>
+				<li class="current_page_item"><a href="#">Home</a></li>
+				<li><a href="recipes">Lista Receitas</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Photos</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Links</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul>
+		</div>
+		<br><br>
+		xoxa
+	</div>	
+${CSS}
 </body>
 </html>
