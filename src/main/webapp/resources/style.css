@@ -142,13 +142,11 @@ a:hover {
 
 #search {
 	float: right;
-	width: 280px;
-	height: 60px;
-	padding: 20px 0px 0px 0px;
+	
 }
 
 #search form {
-	height: 41px;
+	height: 22px;
 	margin: 0;
 	padding: 10px 0 0 20px;
 }
@@ -160,18 +158,25 @@ a:hover {
 }
 
 #search-text {
-	width: 170px;
+	width: 100px;
 	padding: 6px 5px 2px 5px;
+	
 	border: 1px solid #DEDEDE;
 	background: #FFFFFF;
 	text-transform: lowercase;
 	font: normal 11px Arial, Helvetica, sans-serif;
 	color: #5D781D;
+	
+	/* background: white url(/path/to/icon.png) left no-repeat; */
+
+	background: white url(/static/zoom.png) right no-repeat;
+    padding-right: 17px;
 }
 
 #search-submit {
-	width: 50px;
-	height: 22px;
+	width: 60px;
+	height: 24px;
+	padding: 6px 5px 2px 5px;
 	border: none;
 	background: #B9B9B9;
 	color: #000000;

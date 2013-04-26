@@ -25,12 +25,14 @@ ${css}
 	<div id="page" class="container">
 		<div id="content">
 			<div class="post">
-				<h2 class="title"><a href="#">Home</a></h2>
-			<p>Aqui vão estár cenas da homepage... </p>
+				<h2 class="title"><a href="#">Search results</a></h2>
+		<br>
+		${search}
 			</div>
 		<div style="clear: both;">&nbsp;</div>
 		</div>		
-	</div>
+	</div>		
+
 <div id="footer">
 	<p>© 2013 Untitled Inc. All rights reserved. Design by <a href="http://www.freecsstemplates.org">FCT</a>.</p>
 </div>

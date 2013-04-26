@@ -23,13 +23,16 @@ public class RecipeController {
         values.add("Mundo");        
         model.addAttribute("items", values);
         
-      //Comuns
-      		String css = Comuns.getCss();
-      		String autor = Comuns.getAutor();
-      		String titulo = Comuns.getTitulo();
-              model.addAttribute("css", css);
-              model.addAttribute("autor",autor);
-              model.addAttribute("titulo", titulo);
+        //Comuns
+		String css = Comuns.getCss();
+		String autor = Comuns.getAutor();
+		String titulo = Comuns.getTitulo();
+		String menu = Comuns.getMenu("recipes","");
+        model.addAttribute("css", css);
+        model.addAttribute("autor",autor);
+        model.addAttribute("titulo", titulo);
+        model.addAttribute("menu", menu);
+        //Fim Comuns
       	  
               
         return "listRecipes";
@@ -51,13 +54,17 @@ public class RecipeController {
     
     @RequestMapping(method=RequestMethod.GET, value="/recipes/{id}")
     public String showRecipe(Model model, @PathVariable String id) {
-    	//Comuns
+
+        //Comuns
 		String css = Comuns.getCss();
 		String autor = Comuns.getAutor();
 		String titulo = Comuns.getTitulo();
+		String menu = Comuns.getMenu("","");
         model.addAttribute("css", css);
         model.addAttribute("autor",autor);
         model.addAttribute("titulo", titulo);
+        model.addAttribute("menu", menu);
+        //Fim Comuns
 	  
     	        
         List<String> values = new ArrayList<String>();
