@@ -552,3 +552,58 @@ a:hover {
 	height: 50px;
 	background: url(images/img04.png) no-repeat center top;
 }
+
+/*Estilo do form de input de receitas*/
+#recipe form {
+	height: 22px;
+	margin: 0;
+	padding: 10px 0 0 20px;
+}
+
+#recipe fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#recipe-text {
+	width: 250px;
+	padding: 6px 5px 2px 5px;
+	
+	border: 1px solid #DEDEDE;
+	background: #FFFFFF;
+	font: normal 11px Arial, Helvetica, sans-serif;
+	color: #5D781D;
+	
+}
+
+#recipe-textarea {
+	resize: none;
+	width:700px;
+	height:70px;
+	border: 1px solid #DEDEDE;
+	background: #FFFFFF;
+	font: normal 11px Arial, Helvetica, sans-serif;
+	color: #5D781D;
+}
+
+#recipe-submit {
+	:right;
+	width: 80px;
+	height: 24px;
+	padding: 6px 5px 2px 5px;
+	border: none;
+	background: #B9B9B9;
+	color: #000000;
+}
+
+.tabela table {
+	width:100%;
+	background: #FFFFFF;
+}
+
+.tabela td{
+	width:500px;
+	background: #B9B9B9;
+}
+

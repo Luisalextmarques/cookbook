@@ -24,14 +24,7 @@ public class RecipeController {
         model.addAttribute("items", values);
         
         //Comuns
-		String css = Comuns.getCss();
-		String autor = Comuns.getAutor();
-		String titulo = Comuns.getTitulo();
-		String menu = Comuns.getMenu("recipes","");
-        model.addAttribute("css", css);
-        model.addAttribute("autor",autor);
-        model.addAttribute("titulo", titulo);
-        model.addAttribute("menu", menu);
+        Comuns.getDefaults(model,"recipes");
         //Fim Comuns
       	  
               
@@ -42,12 +35,7 @@ public class RecipeController {
     public String createRecipes(Model model) {
         
       //Comuns
-      		String css = Comuns.getCss();
-      		String autor = Comuns.getAutor();
-      		String titulo = Comuns.getTitulo();
-              model.addAttribute("css", css);
-              model.addAttribute("autor",autor);
-              model.addAttribute("titulo", titulo);
+    	Comuns.getDefaults(model,"createRecipe");
               
         return "createRecipe";
     }
@@ -56,14 +44,7 @@ public class RecipeController {
     public String showRecipe(Model model, @PathVariable String id) {
 
         //Comuns
-		String css = Comuns.getCss();
-		String autor = Comuns.getAutor();
-		String titulo = Comuns.getTitulo();
-		String menu = Comuns.getMenu("","");
-        model.addAttribute("css", css);
-        model.addAttribute("autor",autor);
-        model.addAttribute("titulo", titulo);
-        model.addAttribute("menu", menu);
+    	Comuns.getDefaults(model,"");
         //Fim Comuns
 	  
     	        
@@ -79,14 +60,9 @@ public class RecipeController {
     }
     
     @RequestMapping(method=RequestMethod.POST, value="/createRecipe")
- String createRecipe(Model model, String titulo, String problema ,String solucao, String autor) {
+    public String createRecipe(Model model, String titulo, String problema ,String solucao, String autor) {
      
-    	String cssSite = Comuns.getCss();
-		String autorSite = Comuns.getAutor();
-		String tituloSite = Comuns.getTitulo();
-        model.addAttribute("css", cssSite);
-        model.addAttribute("autor",autorSite);
-        model.addAttribute("titulo", tituloSite);
+    	Comuns.getDefaults(model,"CreateRecipe");
         
         model.addAttribute("xoxa", titulo);
     	
