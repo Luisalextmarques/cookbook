@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pt.ulht.es.cookbook.domain.Comuns;
+import pt.ulht.es.cookbook.domain.Recipe;
 
 @Controller
 public class RecipeController {
@@ -33,6 +34,20 @@ public class RecipeController {
               
         return "listRecipes";
     }
+
+    @RequestMapping(method=RequestMethod.GET, value="/createRecipe")
+    public String createRecipes(Model model) {
+        
+      //Comuns
+      		String css = Comuns.getCss();
+      		String autor = Comuns.getAutor();
+      		String titulo = Comuns.getTitulo();
+              model.addAttribute("css", css);
+              model.addAttribute("autor",autor);
+              model.addAttribute("titulo", titulo);
+              
+        return "createRecipe";
+    }
     
     @RequestMapping(method=RequestMethod.GET, value="/recipes/{id}")
     public String showRecipe(Model model, @PathVariable String id) {
@@ -55,7 +70,25 @@ public class RecipeController {
 			return "recipeNotFound";
 		}
     }
+    
+    @RequestMapping(method=RequestMethod.POST, value="/createRecipe")
+ String createRecipe(Model model, String titulo, String problema ,String solucao, String autor) {
+     
+    	String cssSite = Comuns.getCss();
+		String autorSite = Comuns.getAutor();
+		String tituloSite = Comuns.getTitulo();
+        model.addAttribute("css", cssSite);
+        model.addAttribute("autor",autorSite);
+        model.addAttribute("titulo", tituloSite);
         
+        model.addAttribute("xoxa", titulo);
+    	
+        Recipe criar = new Recipe(titulo, problema, solucao, autor);
+        
+        
+        
+    	return "sucessRecipe";
+    }
     
-    
+        
 }
