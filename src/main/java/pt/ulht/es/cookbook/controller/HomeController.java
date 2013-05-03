@@ -32,7 +32,7 @@ public class HomeController {
 	public String showAboutUs(Model model) {
 
 		Comuns.getDefaults(model,"aboutUs");
-		
+
         Date date = new Date(System.currentTimeMillis());
         DateFormat df = DateFormat.getDateInstance();
         model.addAttribute("currentTime", df.format(date));

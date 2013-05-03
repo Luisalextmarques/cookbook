@@ -6,6 +6,7 @@
 			<div class="post">
 				<h2 class="title"><a href="#">Create Recipe</a></h2>
 				<h3> Receita inserida com sucesso!</h3>
+				<h4>XXX- ${chave}-XXX </h4>
 				
 </div>
 		<div style="clear: both;">&nbsp;</div>

@@ -3,6 +3,7 @@ package pt.ulht.es.cookbook.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.ObjectUtils.Null;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,19 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pt.ulht.es.cookbook.domain.Comuns;
+import pt.ulht.es.cookbook.domain.Data;
 import pt.ulht.es.cookbook.domain.Recipe;
 
 @Controller
 public class RecipeController {
-  
+	//Data listaReceitas = new Data();
+	
     @RequestMapping(method=RequestMethod.GET, value="/recipes")
     public String listRecipes(Model model) {
-
+/*
         List<String> values = new ArrayList<String>();
         values.add("Ola");
         values.add("Mundo");        
-        model.addAttribute("items", values);
-        
+        model.addAttribute("items", values);*/
+        model.addAttribute("items",Data.getHashReceitas());
         //Comuns
         Comuns.getDefaults(model,"recipes");
         //Fim Comuns
@@ -46,13 +49,11 @@ public class RecipeController {
         //Comuns
     	Comuns.getDefaults(model,"");
         //Fim Comuns
-	  
+    	Recipe receita = Data.getReceita(id);
     	        
-        List<String> values = new ArrayList<String>();
-        values.add("Ola"+id);
-        values.add("Mundo"+id);        
-        model.addAttribute("items", values);
-        if(id.equals("42")) {
+        
+        if(receita != null) {
+        	model.addAttribute("items", receita);
         	return "detailedRecipe";
 		} else {
 			return "recipeNotFound";
@@ -64,10 +65,11 @@ public class RecipeController {
      
     	Comuns.getDefaults(model,"CreateRecipe");
         
-        model.addAttribute("xoxa", titulo);
+        
     	
         Recipe criar = new Recipe(titulo, problema, solucao, autor);
-        
+        model.addAttribute("chave",Data.putReceita(criar));
+
         
         
     	return "sucessRecipe";

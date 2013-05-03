@@ -7,6 +7,7 @@ public class Comuns {
 	private static String titulo ="CookBook";
 	private static String css =  "<link href='/static/style.css' rel='stylesheet' type='text/css' media='screen' />";
 	
+	
 	public static String getAutor() {
 		return autor;
 	}
@@ -16,6 +17,8 @@ public class Comuns {
 	public static String getCss() {
 		return css;
 	}
+	
+	
 
 	/**
 	 * Função para returnar uma string HTML com o menu e formatações.

@@ -26,7 +26,7 @@ ${css}
 				<h2 class="title"><a href="#">Receitas</a></h2>
 				<ul>
 					<c:forEach var="item" items='${items}'>
-						<li><c:out value="${item}"></c:out></li>
+						<li><a href="/recipes/${item.key}">${item.value.titulo} </a></li>
 					</c:forEach>
 				</ul>
 			</div>
