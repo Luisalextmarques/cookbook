@@ -1,5 +1,6 @@
 package pt.ulht.es.cookbook.domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -22,7 +23,8 @@ public class Recipe {
 	}
 
 	public String getDataCriacao(){
-		return this.dataCriacao.toString();
+		//return this.dataCriacao.toString();
+		return (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(dataCriacao));
 		
 	}
 	

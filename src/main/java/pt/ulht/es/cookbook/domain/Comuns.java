@@ -39,7 +39,7 @@ public class Comuns {
 		//Se tiver opção preenchida selecionar como ativa.
 		strMenuHtml= strMenuHtml + "<li class='searchClass'><div id='search' >"		+ "\n";
 		if (!strOpcao.equals(""))
-			strMenuHtml = strMenuHtml.replace(strOpcao, "current_page_item");
+			strMenuHtml = strMenuHtml.replace("class='"+strOpcao+"'", "class='current_page_item'");
 		strMenuHtml= strMenuHtml + "	<form method='post' action='search'>"		+ "\n";
 		strMenuHtml= strMenuHtml + "		<input name='search' id ='search-text' value ='" + search + "'></input>"	+ "\n";
 		strMenuHtml= strMenuHtml + "		<input type='submit'  value='Search' id ='search-submit'/>"		+ "\n"	;

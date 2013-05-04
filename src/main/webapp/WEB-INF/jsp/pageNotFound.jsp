@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Not Found</title>
-</head>
-<body>
-    This is not the page you are looking for...
-</body>
-</html>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file = "/WEB-INF/jsp/commons/top.jsp" %>
+
+	<h2 class="title"><a href="#">Not Found</a></h2>
+		<p>This is not the cenas que tás a procura ... </p>
+
+<%@ include file = "/WEB-INF/jsp/commons/bottom.jsp" %>
