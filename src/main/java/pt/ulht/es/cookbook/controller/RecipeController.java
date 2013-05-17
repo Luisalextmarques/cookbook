@@ -2,6 +2,7 @@ package pt.ulht.es.cookbook.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.ObjectUtils.Null;
 import org.springframework.stereotype.Controller;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import pt.ulht.es.cookbook.domain.Comuns;
-import pt.ulht.es.cookbook.domain.Data;
+import pt.ist.fenixframework.pstm.AbstractDomainObject;
+import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
 
 @Controller
@@ -25,9 +26,11 @@ public class RecipeController {
         values.add("Ola");
         values.add("Mundo");        
         model.addAttribute("items", values);*/
-        model.addAttribute("items",Data.getHashReceitas());
+    	Set <Recipe> recipes= CookbookManager.getInstance().getRecipeSet();
+    	
+        model.addAttribute("items",recipes);
         //Comuns
-        Comuns.getDefaults(model,"recipes");
+        CookbookManager.getDefaults(model,"recipes");
         //Fim Comuns
       	  
               
@@ -38,7 +41,7 @@ public class RecipeController {
     public String createRecipes(Model model) {
         
       //Comuns
-    	Comuns.getDefaults(model,"createRecipe");
+    	CookbookManager.getDefaults(model,"createRecipe");
               
         return "createRecipe";
     }
@@ -47,9 +50,9 @@ public class RecipeController {
     public String showRecipe(Model model, @PathVariable String id) {
 
         //Comuns
-    	Comuns.getDefaults(model,"");
+    	CookbookManager.getDefaults(model,"");
         //Fim Comuns
-    	Recipe receita = Data.getReceita(id);
+    	Recipe receita = AbstractDomainObject.fromExternalId(id);//Data.getReceita(id);
     	        
         
         if(receita != null) {
@@ -63,16 +66,16 @@ public class RecipeController {
     @RequestMapping(method=RequestMethod.POST, value="/createRecipe")
     public String createRecipe(Model model, String titulo, String problema ,String solucao, String autor) {
      
-    	Comuns.getDefaults(model,"CreateRecipe");
+    	CookbookManager.getDefaults(model,"CreateRecipe");
         
         
     	
         Recipe criar = new Recipe(titulo, problema, solucao, autor);
-        model.addAttribute("chave",Data.putReceita(criar));
+        //model.addAttribute("chave",Data.putReceita(criar));
 
+        return "redirect:/recipes/"+criar.getExternalId();
         
-        
-    	return "sucessRecipe";
+    	//return "sucessRecipe";
     }
     
         

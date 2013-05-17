@@ -2,7 +2,9 @@ package pt.ulht.es.cookbook.domain;
 
 import org.springframework.ui.Model;
 
-public class Comuns {
+import pt.ist.fenixframework.FenixFramework;
+
+public class CookbookManager extends CookbookManager_Base {
 	private static String autor ="Projeto ES - Bruno Sousa / Luís Marques";
 	private static String titulo ="CookBook";
 	private static String css =  "<link href='/static/style.css' rel='stylesheet' type='text/css' media='screen' />";
@@ -18,14 +20,6 @@ public class Comuns {
 		return css;
 	}
 	
-	
-
-	/**
-	 * Função para returnar uma string HTML com o menu e formatações.
-	 * @param strOpcao
-	 * @param search
-	 * @return
-	 */
 	public static String getMenu(String strOpcao, String search){
 		String strMenuHtml ="";
 		//class='current_page_item'
@@ -52,6 +46,7 @@ public class Comuns {
 		
 	}
 	
+	
 	/**
 	 * Função para Preparar Carregamentos predefinidos como o estilo, menu, titulo do site e autores.
 	 * @param model
@@ -59,10 +54,10 @@ public class Comuns {
 	 */
 	public static void getDefaults(Model model, String menuSelecionado){
         //Comuns
-		String css = Comuns.getCss();
-		String autor = Comuns.getAutor();
-		String titulo = Comuns.getTitulo();
-		String menu = Comuns.getMenu(menuSelecionado,"");
+		String css = CookbookManager.getCss();
+		String autor = CookbookManager.getAutor();
+		String titulo = CookbookManager.getTitulo();
+		String menu = CookbookManager.getMenu(menuSelecionado,"");
         model.addAttribute("css", css);
         model.addAttribute("autor",autor);
         model.addAttribute("titulo", titulo);
@@ -71,5 +66,7 @@ public class Comuns {
         //Fim Comuns
 	}
 	
-	
+	public static CookbookManager getInstance() {
+		return FenixFramework.getRoot();
+	}
 }

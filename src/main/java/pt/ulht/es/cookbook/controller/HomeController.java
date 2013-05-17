@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import pt.ulht.es.cookbook.domain.Comuns;
+import pt.ulht.es.cookbook.domain.CookbookManager;
 
 @Controller
 public class HomeController {
   
 	@RequestMapping(method=RequestMethod.GET, value="/")
 	public String showHome(Model model) {
-		Comuns.getDefaults(model,"home");
+		CookbookManager.getDefaults(model,"home");
 		
         Date date = new Date(System.currentTimeMillis());
         DateFormat df = DateFormat.getDateInstance();
@@ -31,7 +31,7 @@ public class HomeController {
 	@RequestMapping(method=RequestMethod.GET, value="/aboutUs")
 	public String showAboutUs(Model model) {
 
-		Comuns.getDefaults(model,"aboutUs");
+		CookbookManager.getDefaults(model,"aboutUs");
 
         Date date = new Date(System.currentTimeMillis());
         DateFormat df = DateFormat.getDateInstance();
@@ -44,7 +44,7 @@ public class HomeController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String search(@ModelAttribute("search")	String search, BindingResult result,Model model) {
 
-		Comuns.getDefaults(model,"searchClass");
+		CookbookManager.getDefaults(model,"searchClass");
 
 		model.addAttribute("search", search);
 		return "search";
