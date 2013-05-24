@@ -584,26 +584,27 @@ a:hover {
 	border: 1px solid #DEDEDE;
 	background: #FFFFFF;
 	font: normal 11px Arial, Helvetica, sans-serif;
-	color: #5D781D;
+	/*color: #5D781D;*/
 }
 
-#recipe-submit {
-	:right;
+/*#recipe-submit {
+	alingh:right;
 	width: 80px;
 	height: 24px;
 	padding: 6px 5px 2px 5px;
-	border: none;
+	border: 1px;
 	background: #B9B9B9;
-	color: #000000;
+	color: #ffffff;
+	/*color: #000000;*/
 }
 
 .tabela table {
 	width:100%;
-	background: #FFFFFF;
+	background: #000000;
 }
 
 .tabela td{
 	width:500px;
-	background: #B9B9B9;
+	/*background: #B9B9B9;*/
 }
 

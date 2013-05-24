@@ -26,13 +26,20 @@
           <textarea name="solucao" id='recipe-textarea'></textarea>
         </td>
       </tr>
-      <tr >
+	  <tr>
+        <td valign="top">Classificações:</td>
+        <td colspan="2">
+          <textarea name="classificacoes" id='recipe-textarea'></textarea>
+        </td>
+      </tr>
+      
+	  
+	  <tr >
         <td class='tabelaEsq'>Autor:</td>
         <td>
           <input type="text" name="autor" id ='recipe-text'/>
         </td>
         <td class='tabelaDir' >
-		
           <input type="submit" id ='recipe-submit' value="Submeter" />
         </td>
       </tr>
