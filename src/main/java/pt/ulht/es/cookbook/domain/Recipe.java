@@ -2,7 +2,7 @@ package pt.ulht.es.cookbook.domain;
 
 import org.joda.time.DateTime;
 
-public class Recipe extends Recipe_Base {
+public class Recipe extends Recipe_Base implements Comparable<Recipe> {
     
     public  Recipe(String titulo, String problema, String solucao, String autor) {
         setTitulo(titulo);
@@ -14,5 +14,9 @@ public class Recipe extends Recipe_Base {
         setCookbookManager(CookbookManager.getInstance());
         
     }
+
+	public int compareTo(Recipe o) {
+		return getTitulo().toLowerCase().compareTo(o.getTitulo().toLowerCase());		
+	}
     
 }

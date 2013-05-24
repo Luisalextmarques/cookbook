@@ -23,13 +23,11 @@ public class CookbookManager extends CookbookManager_Base {
 	public static String getMenu(String strOpcao, String search){
 		String strMenuHtml ="";
 		//class='current_page_item'
-		CharSequence a = strOpcao;//"home"
-		CharSequence repl = "current_page_item";
 		strMenuHtml = "<li class='home'><a href='/'>Home</a></li>" + "\n";
-		strMenuHtml= strMenuHtml + "<li class='createRecipe'><a href='createRecipe'>Create Recipe</a></li>"	+ "\n";	
-		strMenuHtml= strMenuHtml + "<li class='recipes'><a href='recipes'>List Recipes</a></li>"		+ "\n";
-		strMenuHtml= strMenuHtml + "<li class='manageRecipes'><a href='manageRecipes'>Manage Recipes</a></li>"+ "\n"	;
-		strMenuHtml= strMenuHtml + "<li class='aboutUs'><a href='aboutUs'>About Us</a></li>"		+ "\n"	;
+		strMenuHtml= strMenuHtml + "<li class='createRecipe'><a href='/createRecipe'>Create Recipe</a></li>"	+ "\n";	
+		strMenuHtml= strMenuHtml + "<li class='recipes'><a href='/recipes'>List Recipes</a></li>"		+ "\n";
+		strMenuHtml= strMenuHtml + "<li class='manageRecipes'><a href='/manageRecipes'>Manage Recipes</a></li>"+ "\n"	;
+		strMenuHtml= strMenuHtml + "<li class='aboutUs'><a href='/aboutUs'>About Us</a></li>"		+ "\n"	;
 		//Se tiver opção preenchida selecionar como ativa.
 		strMenuHtml= strMenuHtml + "<li class='searchClass'><div id='search' >"		+ "\n";
 		if (!strOpcao.equals(""))
