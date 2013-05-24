@@ -16,6 +16,7 @@ import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
 
+
 @Controller
 public class RecipeController {
 	// Data listaReceitas = new Data();
@@ -132,17 +133,20 @@ public class RecipeController {
 	/*
 	 * retornar objeto a editar e reencaminhar para vista de edição.
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes/del?{id}")
+	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes/del/{id}")
 	public String delRecipe(Model model, @PathVariable String id) {
 
 		// Comuns
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
+		
 
 		if (receita != null) {
+			receita.delete();
+			CookbookManager.getInstance().removeRecipe(receita);
 			model.addAttribute("items", receita);
-			return "redirect:/manageRecipes/" + receita.getExternalId();
+			return "sucessDelRecipe";
 		} else {
 			return "recipeNotFound";
 		}

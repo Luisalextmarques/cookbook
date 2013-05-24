@@ -13,10 +13,16 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe> {
         
         setCookbookManager(CookbookManager.getInstance());
         
+        
     }
 
 	public int compareTo(Recipe o) {
 		return getTitulo().toLowerCase().compareTo(o.getTitulo().toLowerCase());		
+	}
+	
+	public void delete() {
+		setCookbookManager(null);
+		super.deleteDomainObject();
 	}
     
 }

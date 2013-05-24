@@ -6,7 +6,7 @@
 				<ul>
 					<c:forEach var="item" items='${items}'>
 						<li>Receita: <a href="/manageRecipes/${item.getExternalId()}">${item.titulo} </a> 
-						- <a href="/manageRecipes/del?${item.getExternalId()}">Apagar Receita</a>
+						- <a href="/manageRecipes/del/${item.getExternalId()}">Apagar Receita</a>
 						<br>${item.problema}
 						</li>
 						
