@@ -21,8 +21,13 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe> {
         
     }
 
-    public void tags (String classificacao){
-    	addTags(new Tags(classificacao));
+    public void tags (String classificacao){    	
+    	String arr[] = classificacao.split(",");
+    	for (int i =0;i<arr.length;i++){
+    		addTags(new Tags(arr[i].trim()));
+    		
+    	}   
+    	
     }
     
 	public int compareTo(Recipe o) {
