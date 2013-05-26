@@ -12,6 +12,9 @@ body {
 	font-family: 'Oxygen', sans-serif;
 	font-size: 13px;
 	color: #8A8985;
+	overflow: -moz-scrollbars-vertical; 
+	overflow-y: scroll;
+
 }
 
 h1, h2, h3 {
@@ -90,7 +93,7 @@ a:hover {
 
 #logo {
 	overflow: hidden;
-	height: 175px;
+	height: 150px;
 }
 
 #logo h1, #logo p {
@@ -98,7 +101,7 @@ a:hover {
 }
 
 #logo h1 {
-	padding: 25px 0px 0px 0px;
+	padding: 5px 5px 0px 0px;
 	letter-spacing: -6px;
 	text-transform: lowercase;
 	font-size: 100px;
@@ -187,7 +190,7 @@ a:hover {
 #menu-wrapper {
 	overflow: hidden;
 	height: 52px;
-	margin-bottom: 2em;
+	margin-bottom: 5px;
 	background: #3C342E;
 }
 
@@ -252,7 +255,7 @@ a:hover {
 }
 
 .post .title {
-	margin: 0px 0px 30px 0px;
+	margin: 0px 0px 20px 0px;
 	padding: 0px 0px 10px 0px;
 	border-bottom: 3px solid #E0E1D6;
 	text-shadow: 1px 1px 0px #FFFFFF;
@@ -369,7 +372,7 @@ a:hover {
 
 #footer-bg {
 	overflow: hidden;
-	padding: 70px 0px;
+	padding: 30px 0px;
 	background: #3C342E;
 	border-top: 10px solid #E5E6DD;
 }
@@ -378,7 +381,7 @@ a:hover {
 }
 
 #footer-content h2 {
-	margin: 0px 0px 20px 0px;
+	margin: 0px 0px 10px 0px;
 	padding: 0px 0px 10px 0px;
 	border-bottom: 2px solid #DE5635;
 	font-size: 22px;
@@ -404,14 +407,14 @@ a:hover {
 /* Footer */
 
 #footer {
-	height: 100px;
+	height: 30px;
 	margin: 0 auto;
-	padding: 50px 0px 0px 0px;
+	padding: 30px 0px 0px 0px;
 }
 
 #footer p {
 	margin: 0;
-	padding-top: 10px;
+	padding-top: 5px;
 	line-height: normal;
 	text-align: center;
 	text-shadow: 1px 1px 0px #FFFFFF;

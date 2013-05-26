@@ -1,11 +1,8 @@
-﻿l<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file = "/WEB-INF/jsp/commons/top.jsp" %>
 
-
 				<h2 class="title"><a href="#">Create Recipe</a></h2>
-				
-				
-
+								
   <form name="createRecipe" action="createRecipe" method="post" id="createRecipe">
     <table width='100%' align="center" border='0' class="tabela">
       <tr >
@@ -44,5 +41,5 @@
         </td>
       </tr>
     </table>
-  </form>${CSS}</body>
+  </form>
 <%@ include file = "/WEB-INF/jsp/commons/bottom.jsp" %>

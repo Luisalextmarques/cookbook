@@ -10,15 +10,11 @@
 <h3>Solução</h3>
 <h4> ${items.solucao} </h4>
 
-<h2 class="title"><a href="#">Classificações</a></h2>
-				<ul>
-					<c:forEach var="item" items='${items.getTags()}'>
-						<li>Tags: <a href="/recipes/${item.getExternalId()}">${item.tag} </a>
-						<br>${item.tag}
-						</li>
-						
-					</c:forEach>
-				</ul>	
+<h3>Classificações</h3>
+	<c:forEach var="item" items='${items.getTags()}'>
+		<h4><a href="#">${item.tag} </a></h4>
+	</c:forEach>
+</ul>	
 
 
 <h3>Autor</h3>
