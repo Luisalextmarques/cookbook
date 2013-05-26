@@ -7,13 +7,21 @@ class Recipe {
 	String problema;
 	String solucao;
 	String autor;
-	String tags;
 	DateTime dataCriacao;
 	
+}
+
+class Tags {
+	String tag;
 }
 
 relation CookbookManagerHasRecipes{
 	CookbookManager playsRole cookbookManager { multiplicity 1..1 ;}
 	Recipe playsRole recipe { multiplicity 0..*; }
+}
+
+relation RecipeHasTags{
+	Recipe playsRole recipe { multiplicity 1..1 ;}
+	Tags playsRole tags { multiplicity 0..*; }
 }
 	
