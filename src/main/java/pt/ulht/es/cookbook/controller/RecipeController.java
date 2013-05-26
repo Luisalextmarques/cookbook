@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
+import pt.ulht.es.cookbook.domain.Tags;
 
 
 @Controller
@@ -63,9 +64,12 @@ public class RecipeController {
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-
+		
+		
 		if (receita != null) {
 			model.addAttribute("items", receita);
+			List<Tags> lista =  new ArrayList<Tags>(receita.getTags());
+			model.addAttribute("class", lista);
 			return "detailedRecipe";
 		} else {
 			return "recipeNotFound";
@@ -77,13 +81,16 @@ public class RecipeController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createRecipe")
 	public String createRecipe(Model model, String titulo, String problema,
-			String solucao, String autor) {
+			String solucao, String autor, String classificacoes) {
 
 		CookbookManager.getDefaults(model, "CreateRecipe");
 
-		Recipe criar = new Recipe(titulo, problema, solucao, autor);
-		// model.addAttribute("chave",Data.putReceita(criar));
+		Recipe criar = new Recipe(titulo, problema, solucao, autor, classificacoes);
+		criar.tags(classificacoes);
 
+		
+		// model.addAttribute("chave",Data.putReceita(criar));
+		//Tags tag = new Tags(classificacoes, criar);
 		return "redirect:/recipes/" + criar.getExternalId();
 
 		// return "sucessRecipe";
