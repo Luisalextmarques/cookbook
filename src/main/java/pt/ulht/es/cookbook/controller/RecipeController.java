@@ -19,7 +19,32 @@ import pt.ulht.es.cookbook.domain.Tags;
 
 @Controller
 public class RecipeController {
-	// Data listaReceitas = new Data();
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search(@ModelAttribute("search") String search,
+			BindingResult result, Model model) {
+
+		List<Recipe> recipes = new ArrayList<Recipe>(CookbookManager.getInstance().getRecipeSet());
+
+		for (int i =0;i<recipes.size();i++){
+			if (!recipes.get(i).pesquisaTexto(search)){
+				recipes.remove(i--);		
+				System.out.println("Removido" + i + " " + recipes.size());
+			}
+		}
+
+
+		Collections.sort(recipes);
+
+		model.addAttribute("search", search + " "+recipes.size());
+
+		model.addAttribute("items", recipes);
+		CookbookManager.getDefaults(model, "searchClass");
+
+		return "search";
+		
+	}
+	
 	/*
 	 * Listar Receitas - Retorna lista de receitas ordenadas.
 	 */

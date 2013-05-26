@@ -40,5 +40,18 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe> {
 
 		super.deleteDomainObject();
 	}
+	
+	public boolean pesquisaTexto(String strPesquisa) {
+		if (getTitulo().toLowerCase().contains(strPesquisa))
+			return true;
+		
+		if (getProblema().toLowerCase().contains(strPesquisa))
+			return true;
+		
+		if (getSolucao().toLowerCase().contains(strPesquisa))
+			return true;
+		
+		return false;
+	}
     
 }
