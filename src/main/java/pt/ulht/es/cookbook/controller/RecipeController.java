@@ -95,7 +95,7 @@ public class RecipeController {
 		
 		if (receita != null) {
 			model.addAttribute("items", receita);
-			List<Tag> lista =  new ArrayList<Tag>(receita.getTags());
+			List<Tag> lista =  new ArrayList<Tag>(receita.getTag());
 			model.addAttribute("class", lista);
 			return "detailedRecipe";
 		} else {

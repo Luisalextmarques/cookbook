@@ -2,7 +2,9 @@ package pt.ulht.es.cookbook.domain;
 
 class CookbookManager;
 
-class Recipe {
+class Recipe;
+
+class RecipeVersion{
 	String titulo;
 	String problema;
 	String solucao;
@@ -17,11 +19,22 @@ class Tag {
 
 relation CookbookManagerHasRecipes{
 	CookbookManager playsRole cookbookManager { multiplicity 1..1 ;}
-	Recipe playsRole recipe { multiplicity 0..*; }
+	RecipeVersionplaysRole recipeVersion { multiplicity 0..*; }
 }
 
-relation RecipeHasTags{
+relation RecipeHasRecipeVersions{
 	Recipe playsRole recipe { multiplicity 1..1 ;}
+	RecipeVersion playsRole recipeVersion { multiplicity 0..*; }
+}
+
+relation RecipeHasLastVersion{
+	Recipe playsRole recipeLast { multiplicity 0..1 ;}
+	RecipeVersion playsRole lastVersion { multiplicity 0..1; }
+}
+
+
+relation RecipeVersionHasTags{
+	RecipeVersion playsRole recipeVersion{ multiplicity 0..* ;}
 	Tag playsRole tag { multiplicity 0..*; }
 }
 
@@ -29,5 +42,6 @@ relation CookbookManagerHasTags{
 	CookbookManager playsRole cookbookManager { multiplicity 1..1 ;}
 	Tag playsRole tag { multiplicity 0..*; }
 }
+
 
 	
