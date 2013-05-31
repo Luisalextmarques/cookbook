@@ -11,7 +11,7 @@ class Recipe {
 	
 }
 
-class Tags {
+class Tag {
 	String tag;
 }
 
@@ -22,6 +22,12 @@ relation CookbookManagerHasRecipes{
 
 relation RecipeHasTags{
 	Recipe playsRole recipe { multiplicity 1..1 ;}
-	Tags playsRole tags { multiplicity 0..*; }
+	Tag playsRole tag { multiplicity 0..*; }
 }
+
+relation CookbookManagerHasTags{
+	CookbookManager playsRole cookbookManager { multiplicity 1..1 ;}
+	Tag playsRole tag { multiplicity 0..*; }
+}
+
 	

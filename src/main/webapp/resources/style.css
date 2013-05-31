@@ -14,7 +14,7 @@ body {
 	color: #8A8985;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
 	margin: 0;
 	padding: 0;
 	text-transform: uppercase;
@@ -32,6 +32,10 @@ h2 {
 
 h3 {
 	font-size: 1.6em;
+}
+
+h4 {
+	font-size: 1.2em;
 }
 
 p, ul, ol {
@@ -252,8 +256,8 @@ a:hover {
 }
 
 .post .title {
-	margin: 0px 0px 30px 0px;
-	padding: 0px 0px 10px 0px;
+	margin: 0px 0px 10px 0px;
+	padding: 20px 0px 10px 0px;
 	border-bottom: 3px solid #E0E1D6;
 	text-shadow: 1px 1px 0px #FFFFFF;
 	font-size: 26px;
@@ -584,8 +588,9 @@ a:hover {
 	border: 1px solid #DEDEDE;
 	background: #FFFFFF;
 	font: normal 11px Arial, Helvetica, sans-serif;
-	/*color: #5D781D;*/
+	color: #5D781D;
 }
+
 
 /*#recipe-submit {
 	alingh:right;

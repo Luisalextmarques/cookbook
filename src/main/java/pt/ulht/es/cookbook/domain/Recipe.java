@@ -15,7 +15,7 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe> {
         setAutor(autor);
         setDataCriacao(new DateTime());
         
-        //addTags(new Tags(classificacoes, this));
+        //addTag(new Tag(classificacoes, this));
         setCookbookManager(CookbookManager.getInstance());
         
         
@@ -24,7 +24,7 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe> {
     public void tags (String classificacao){    	
     	String arr[] = classificacao.split(",");
     	for (int i =0;i<arr.length;i++){
-    		addTags(new Tags(arr[i].trim()));
+    		addTag(new Tag(arr[i].trim()));
     		
     	}   
     	
@@ -36,8 +36,8 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe> {
 	
 	public void delete() {
 		setCookbookManager(null);
-		List<Tags> lista =  new ArrayList<Tags>(this.getTags());
-		Iterator<Tags> it = lista.iterator();
+		List<Tag> lista =  new ArrayList<Tag>(this.getTag());
+		Iterator<Tag> it = lista.iterator();
 		while (it.hasNext()){
 			it.next().delete();
 		}

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
-import pt.ulht.es.cookbook.domain.Tags;
+import pt.ulht.es.cookbook.domain.Tag;
 
 
 @Controller
@@ -95,7 +95,7 @@ public class RecipeController {
 		
 		if (receita != null) {
 			model.addAttribute("items", receita);
-			List<Tags> lista =  new ArrayList<Tags>(receita.getTags());
+			List<Tag> lista =  new ArrayList<Tag>(receita.getTags());
 			model.addAttribute("class", lista);
 			return "detailedRecipe";
 		} else {

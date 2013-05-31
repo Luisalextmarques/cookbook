@@ -11,35 +11,33 @@
       <tr >
         <td >Titulo:</td>
         <td colspan="2">
-          <input type="text" id ='recipe-text' name="titulo" size="80" />
+          <input type="text" name="titulo" id ='recipe-text'  size="80" />
         </td>
       </tr>
       <tr>
         <td valign="top">Problema:</td>
         <td colspan="2">
-          <textarea name="problema" id='recipe-textarea'></textarea>
+          <textarea type="text" name="problema" id='recipe-textarea'></textarea>
         </td>
       </tr>
       <tr>
         <td valign="top">Solução:</td>
         <td colspan="2">
-          <textarea name="solucao" id='recipe-textarea'></textarea>
+          <textarea type="text" name="solucao" id='recipe-textarea'></textarea>
         </td>
       </tr>
 	  <tr>
         <td valign="top">Classificações:</td>
-        <td colspan="2">
-          <textarea name="classificacoes" id='recipe-textarea'></textarea>
+        <td colspan="1">
+          <textarea type="text" name="classificacoes" id='recipe-textarea'></textarea>
         </td>
       </tr>
-      
-	  
 	  <tr >
-        <td class='tabelaEsq'>Autor:</td>
-        <td>
+        <td>Autor:</td>
+        <td colspan="1">
           <input type="text" name="autor" id ='recipe-text'/>
         </td>
-        <td class='tabelaDir' >
+        <td align="right" colspan="1">
           <input type="submit" id ='recipe-submit' value="Submeter" />
         </td>
       </tr>

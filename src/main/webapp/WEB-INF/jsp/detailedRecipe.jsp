@@ -5,23 +5,27 @@
 
 				<h2 class="title"><a href="#">Titulo: ${items.titulo} | Data: ${items.getDataCriacao()}</a></h2>
 				
-<h3>Problema</h3> 
+<h3 class="title">Problema</h3> 
 <h4>${items.problema} </h4>
-<h3>Solução</h3>
-<h4> ${items.solucao} </h4>
-
-<h2 class="title"><a href="#">Classificações</a></h2>
+<br>
+<h3 class="title">Solução</h3>
+<h4 > ${items.solucao} </h4>
+<br>
+<h3 class="title">Autor</h3>
+<h4> ${items.autor} </h4>
+<br>
+<table width='100%' align="left" border='0' >
+<h3 class="title">Classificações</h3>
+      		<tr>	
+			<td valign="top"  width='2%'>Tags:</td>
+				<td>
 				<ul>
 					<c:forEach var="item" items='${items.getTags()}'>
-						<li>Tags: <a href="/recipes/${item.getExternalId()}">${item.tag} </a>
-						<br>${item.tag}
-						</li>
-						
+						<li>${item.tag} 
+						</li>		
 					</c:forEach>
 				</ul>	
-
-
-<h3>Autor</h3>
-<h4> ${items.autor} </h4>
-
+			</td>
+			</tr>
+</table>
 <%@ include file = "/WEB-INF/jsp/commons/bottom.jsp" %>

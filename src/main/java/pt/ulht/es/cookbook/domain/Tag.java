@@ -1,9 +1,9 @@
 package pt.ulht.es.cookbook.domain;
 
-public class Tags extends Tags_Base {
+public class Tag extends Tag_Base {
     
-    public  Tags(String tags) {    
-    	setTag(tags);
+    public  Tag(String tag) {    
+    	setTag(tag);
       
         
     }
