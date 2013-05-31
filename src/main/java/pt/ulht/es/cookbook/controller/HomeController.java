@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import pt.ulht.es.cookbook.domain.CookbookManager;
 
+
 @Controller
 public class HomeController {
 

@@ -19,7 +19,7 @@ class Tag {
 
 relation CookbookManagerHasRecipes{
 	CookbookManager playsRole cookbookManager { multiplicity 1..1 ;}
-	RecipeVersionplaysRole recipeVersion { multiplicity 0..*; }
+	RecipeVersion playsRole recipeVersion { multiplicity 0..*; }
 }
 
 relation RecipeHasRecipeVersions{
@@ -34,7 +34,7 @@ relation RecipeHasLastVersion{
 
 
 relation RecipeVersionHasTags{
-	RecipeVersion playsRole recipeVersion{ multiplicity 0..* ;}
+	RecipeVersion playsRole recipeVersion { multiplicity 0..*;}
 	Tag playsRole tag { multiplicity 0..*; }
 }
 
