@@ -7,6 +7,21 @@
 				
 <h3 class="title">Problema</h3> 
 <h4>${items.problema} </h4>
+<<<<<<< HEAD
+<h3>Solução</h3>
+<h4> ${items.solucao} </h4>
+
+<h3>Classificações</h3>
+	<c:forEach var="item" items='${items.getTags()}'>
+		<h4><a href="#">${item.tag} </a></h4>
+	</c:forEach>
+</ul>	
+
+
+<h3>Autor</h3>
+<h4> ${items.autor} </h4>
+
+=======
 <br>
 <h3 class="title">Solução</h3>
 <h4 > ${items.solucao} </h4>
@@ -28,4 +43,5 @@
 			</td>
 			</tr>
 </table>
+>>>>>>> DML
 <%@ include file = "/WEB-INF/jsp/commons/bottom.jsp" %>
