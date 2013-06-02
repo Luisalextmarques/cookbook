@@ -2,7 +2,7 @@
 <%@ include file = "/WEB-INF/jsp/commons/top.jsp" %>
 
 
-				<h2 class="title"><a href="#">Create Recipe</a></h2>
+				<h2 class="title"><a href="#">Edit Recipe</a></h2>
 				
 				
 

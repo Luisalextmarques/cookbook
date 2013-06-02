@@ -3,15 +3,13 @@ package pt.ulht.es.cookbook.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import antlr.Version;
 
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
@@ -55,9 +53,12 @@ public class RecipeController {
 		 * List<String> values = new ArrayList<String>(); values.add("Ola");
 		 * values.add("Mundo"); model.addAttribute("items", values);
 		 */
+		//List<Recipe> recipes = new ArrayList<Recipe>(
+			//	CookbookManager.getInstance().);
+
 		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
 				CookbookManager.getInstance().getRecipeVersionSet());
-
+		
 		Collections.sort(recipes);
 
 		model.addAttribute("items", recipes);
@@ -89,12 +90,13 @@ public class RecipeController {
 		// Comuns
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
+		
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-
-		if (receita != null) {
-			model.addAttribute("items", receita);
-			List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance()
-					.getTagSet());
+		RecipeVersion ultimaVersao = receita.getLastVersion();
+		
+		if (ultimaVersao != null) {
+			model.addAttribute("items", ultimaVersao);
+			List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance().getTagSet());
 			model.addAttribute("class", lista);
 			return "detailedRecipe";
 		} else {
@@ -111,15 +113,15 @@ public class RecipeController {
 
 		CookbookManager.getDefaults(model, "CreateRecipe");
 
-		RecipeVersion criar = new RecipeVersion(titulo, problema, solucao,
+		Recipe criar = new Recipe(titulo, problema, solucao,
 				autor, classificacoes);
-		criar.tags(classificacoes);
-
+		
+		
 		// model.addAttribute("chave",Data.putReceita(criar));
 		// Tags tag = new Tags(classificacoes, criar);
 		return "redirect:/recipes/" + criar.getExternalId();
 
-		// return "sucessRecipe";
+		 //return "sucessDelRecipe";
 	}
 
 	// MANAGE RECIPES
@@ -151,9 +153,12 @@ public class RecipeController {
 		// Comuns
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
+		
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		if (receita != null) {
-			model.addAttribute("items", receita);
+		RecipeVersion ultimaVersao = receita.getLastVersion();
+		
+		if (ultimaVersao != null) {
+			model.addAttribute("items", ultimaVersao);
 			return "editRecipe";
 		} else {
 			return "recipeNotFound";

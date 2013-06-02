@@ -67,4 +67,6 @@ public class CookbookManager extends CookbookManager_Base {
 	public static CookbookManager getInstance() {
 		return FenixFramework.getRoot();
 	}
+	
+	
 }

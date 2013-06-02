@@ -15,8 +15,10 @@ public class RecipeVersion extends RecipeVersion_Base implements Comparable<Reci
         setAutor(autor);
         setDataCriacao(new DateTime());
         
-        //addTag(new Tag(classificacoes, this));
-        setCookbookManager(CookbookManager.getInstance());
+       
+       setCookbookManager(CookbookManager.getInstance());
+       
+       //addTag(new Tag(classificacoes));
         
         
     }
@@ -33,6 +35,8 @@ public class RecipeVersion extends RecipeVersion_Base implements Comparable<Reci
 		return getTitulo().toLowerCase().compareTo(o.getTitulo().toLowerCase());		
 	}
 
+	
+	
 	public void delete() {
 		setCookbookManager(null);
 		List<Tag> lista =  new ArrayList<Tag>(this.getTag());
