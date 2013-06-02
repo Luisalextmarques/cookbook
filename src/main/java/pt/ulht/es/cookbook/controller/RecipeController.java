@@ -16,37 +16,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
+import pt.ulht.es.cookbook.domain.RecipeVersion;
 import pt.ulht.es.cookbook.domain.Tag;
-
 
 @Controller
 public class RecipeController {
 
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String search(@ModelAttribute("search") String search,
-			BindingResult result, Model model) {
-
-		List<Recipe> recipes = new ArrayList<Recipe>(CookbookManager.getInstance().getRecipeSet());
-
-		for (int i =0;i<recipes.size();i++){
-			if (!recipes.get(i).pesquisaTexto(search)){
-				recipes.remove(i--);		
-				System.out.println("Removido" + i + " " + recipes.size());
-			}
-		}
-
-
-		Collections.sort(recipes);
-
-		model.addAttribute("search", search + " "+recipes.size());
-
-		model.addAttribute("items", recipes);
-		CookbookManager.getDefaults(model, "searchClass");
-
-		return "search";
-		
-	}
-	
+	/*
+	 * @RequestMapping(value = "/search", method = RequestMethod.POST) public
+	 * String search(@ModelAttribute("search") String search, BindingResult
+	 * result, Model model) {
+	 * 
+	 * List<Recipe> recipes = new
+	 * ArrayList<Recipe>(CookbookManager.getInstance().getRecipeSet());
+	 * 
+	 * for (int i =0;i<RecipeVersion.size();i++){ if
+	 * (!RecipeVersion.get(i).pesquisaTexto(search)){ recipes.remove(i--);
+	 * System.out.println("Removido" + i + " " + recipes.size()); } }
+	 * 
+	 * 
+	 * Collections.sort(recipes);
+	 * 
+	 * model.addAttribute("search", search + " "+recipes.size());
+	 * 
+	 * model.addAttribute("items", recipes); CookbookManager.getDefaults(model,
+	 * "searchClass");
+	 * 
+	 * return "search";
+	 * 
+	 * }
+	 */
 	/*
 	 * Listar Receitas - Retorna lista de receitas ordenadas.
 	 */
@@ -56,8 +55,8 @@ public class RecipeController {
 		 * List<String> values = new ArrayList<String>(); values.add("Ola");
 		 * values.add("Mundo"); model.addAttribute("items", values);
 		 */
-		List<Recipe> recipes = new ArrayList<Recipe>(CookbookManager
-				.getInstance().getRecipeSet());
+		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
+				CookbookManager.getInstance().getRecipeVersionSet());
 
 		Collections.sort(recipes);
 
@@ -91,11 +90,11 @@ public class RecipeController {
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		
-		
+
 		if (receita != null) {
 			model.addAttribute("items", receita);
-			List<Tag> lista =  new ArrayList<Tag>(receita.getTag());
+			List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance()
+					.getTagSet());
 			model.addAttribute("class", lista);
 			return "detailedRecipe";
 		} else {
@@ -112,12 +111,12 @@ public class RecipeController {
 
 		CookbookManager.getDefaults(model, "CreateRecipe");
 
-		Recipe criar = new Recipe(titulo, problema, solucao, autor, classificacoes);
+		RecipeVersion criar = new RecipeVersion(titulo, problema, solucao,
+				autor, classificacoes);
 		criar.tags(classificacoes);
 
-		
 		// model.addAttribute("chave",Data.putReceita(criar));
-		//Tags tag = new Tags(classificacoes, criar);
+		// Tags tag = new Tags(classificacoes, criar);
 		return "redirect:/recipes/" + criar.getExternalId();
 
 		// return "sucessRecipe";
@@ -128,13 +127,13 @@ public class RecipeController {
 	/*
 	 * retornar vista de gestão de receitas
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes")
+	/*@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes")
 	public String manageRecipes(Model model) {
 		/*
 		 * List<String> values = new ArrayList<String>(); values.add("Ola");
 		 * values.add("Mundo"); model.addAttribute("items", values);
 		 */
-		Set<Recipe> recipes = CookbookManager.getInstance().getRecipeSet();
+		/*Set<Recipe> recipes = CookbookManager.getInstance().getRecipeSet();
 
 		model.addAttribute("items", recipes);
 		// Comuns
@@ -142,19 +141,17 @@ public class RecipeController {
 		// Fim Comuns
 
 		return "manageRecipes";
-	}
+	}*/
 
 	/*
 	 * retornar objeto a editar e reencaminhar para vista de edição.
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes/{id}")
 	public String editRecipe(Model model, @PathVariable String id) {
-
 		// Comuns
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-
 		if (receita != null) {
 			model.addAttribute("items", receita);
 			return "editRecipe";
@@ -163,28 +160,21 @@ public class RecipeController {
 		}
 	}
 
-	/*
-	 * retornar objeto a editar e reencaminhar para vista de edição.
-	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes/del/{id}")
-	public String delRecipe(Model model, @PathVariable String id) {
-
-		// Comuns
-		CookbookManager.getDefaults(model, "");
-		// Fim Comuns
-		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		
-
-		if (receita != null) {
-			receita.delete();
-			CookbookManager.getInstance().removeRecipe(receita);
-			model.addAttribute("items", receita);
-			return "sucessDelRecipe";
-		} else {
-			return "recipeNotFound";
-		}
-	}
-	
-	
-
-}
+/*
+ * retornar objeto a editar e reencaminhar para vista de edição.
+ */
+/*
+ @RequestMapping(method = RequestMethod.GET, value =
+  "/manageRecipes/del/{id}") public String delRecipe(Model model, @PathVariable
+  String id) {
+  
+  // Comuns CookbookManager.getDefaults(model, ""); // Fim Comuns RecipeVersion
+  receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
+  
+  if (receita != null) { receita.delete();
+  CookbookManager.getInstance().removeRecipe(receita);
+  model.addAttribute("items", receita); return "sucessDelRecipe"; } else {
+  return "recipeNotFound"; } }
+  
+ */ 
+ }

@@ -1,5 +1,7 @@
 package pt.ulht.es.cookbook.domain;
 
+import org.apache.taglibs.standard.tag.el.core.SetTag;
+
 public class Tag extends Tag_Base {
     
     public  Tag(String tag) {    
@@ -9,7 +11,7 @@ public class Tag extends Tag_Base {
     }
     
     public void delete() {
-    	setRecipe(null);
+    	setTag(null);
     	super.deleteDomainObject();
     }
     

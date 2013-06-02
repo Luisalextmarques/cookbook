@@ -33,10 +33,11 @@
         <td>Autor:</td>
         <td colspan="1">
           <input type="text" name="autor" id ='recipe-text'/>
+		 <input type="submit" id ='recipe-submit' value="Submeter" />
         </td>
-        <td align="right" colspan="1">
+       <!-- <td align="right" colspan="1">
           <input type="submit" id ='recipe-submit' value="Submeter" />
-        </td>
+        </td>-->
       </tr>
     </table>
   </form>
