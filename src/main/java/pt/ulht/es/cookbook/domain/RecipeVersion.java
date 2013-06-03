@@ -60,6 +60,4 @@ public class RecipeVersion extends RecipeVersion_Base implements Comparable<Reci
 		
 		return false;
 	}
-
-	
 }
