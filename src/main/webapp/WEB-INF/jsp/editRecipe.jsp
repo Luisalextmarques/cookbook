@@ -26,7 +26,20 @@
           <textarea name="solucao" id='recipe-textarea'>${items.solucao}</textarea>
         </td>
       </tr>
-      <tr >
+       <tr>
+        <td valign="top">Classificações:</td>
+        <td colspan="2">
+          <textarea type="text" name="classificacoes" id='recipe-textarea'>
+		  
+		  <c:forEach var="item" items='${items.getTag()}'>
+						"{item.tag}, " 
+								
+					</c:forEach>
+		  
+		  </textarea>
+		</td>
+      </tr>
+	  <tr >
         <td class='tabelaEsq'>Autor:</td>
         <td>
           <input type="text" name="autor" id ='recipe-text' value=${items.autor} />
