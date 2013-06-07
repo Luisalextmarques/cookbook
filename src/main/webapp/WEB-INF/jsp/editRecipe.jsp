@@ -11,7 +11,7 @@
       <tr >
         <td >Titulo:</td>
         <td colspan="2">
-          <input type="text" id ='recipe-text' name="titulo" size="80" value =${items.titulo} />
+          <input type="text" id ='recipe-text' name="titulo" size="80" value ="${items.titulo}" />
         </td>
       </tr>
       <tr>

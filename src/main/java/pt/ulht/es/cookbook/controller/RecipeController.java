@@ -3,15 +3,11 @@ package pt.ulht.es.cookbook.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import antlr.Version;
 
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
@@ -181,16 +177,39 @@ public class RecipeController {
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
 		
-		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		RecipeVersion ultimaVersao = receita.getLastVersion();
+		RecipeVersion receitaAlterar = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
+		//RecipeVersion ultimaVersao = receita.getLastVersion();
 		
-		if (ultimaVersao != null) {
-			model.addAttribute("items", ultimaVersao);
+		
+		if (receitaAlterar != null) {
+			model.addAttribute("items", receitaAlterar);
 			return "editRecipe";
 		} else {
 			return "recipeNotFound";
 		}
 	}
+	
+
+	/*
+	 * Criar objeto Receita ,guardar e reencaminhar para mostragem.
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = "/manageRecipes/editRecipe")
+	public String editRecipe(Model model, String titulo, String problema,
+			String solucao, String autor, String classificacoes) {
+
+		CookbookManager.getDefaults(model, "CreateRecipe");
+
+		Recipe criar = new Recipe(titulo, problema, solucao,
+				autor, classificacoes);
+		
+		
+		// model.addAttribute("chave",Data.putReceita(criar));
+		// Tags tag = new Tags(classificacoes, criar);
+		return "redirect://recipes/" + criar.getExternalId();
+
+		 //return "sucessDelRecipe";
+	}
+
 
 /*
  * retornar objeto a editar e reencaminhar para vista de edição.
