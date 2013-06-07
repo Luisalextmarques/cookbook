@@ -12,6 +12,16 @@ public class Recipe extends Recipe_Base  {
 		a.tags(classificacoes);
 		
 	}
+	
+	public RecipeVersion match(String strPesquisa){
+		if (this.getLastVersion().pesquisaTexto(strPesquisa))
+			return this.getLastVersion();
+			
+			
+		return null;
+		
+		
+	}
 
     
 	

@@ -18,30 +18,38 @@ import pt.ulht.es.cookbook.domain.Tag;
 @Controller
 public class RecipeController {
 
-	/*
-	 * @RequestMapping(value = "/search", method = RequestMethod.POST) public
-	 * String search(@ModelAttribute("search") String search, BindingResult
-	 * result, Model model) {
-	 * 
-	 * List<Recipe> recipes = new
-	 * ArrayList<Recipe>(CookbookManager.getInstance().getRecipeSet());
-	 * 
-	 * for (int i =0;i<RecipeVersion.size();i++){ if
-	 * (!RecipeVersion.get(i).pesquisaTexto(search)){ recipes.remove(i--);
-	 * System.out.println("Removido" + i + " " + recipes.size()); } }
-	 * 
-	 * 
-	 * Collections.sort(recipes);
-	 * 
-	 * model.addAttribute("search", search + " "+recipes.size());
-	 * 
-	 * model.addAttribute("items", recipes); CookbookManager.getDefaults(model,
-	 * "searchClass");
-	 * 
-	 * return "search";
-	 * 
-	 * }
-	 */
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search(@ModelAttribute("search") String search,
+			BindingResult result, Model model) {
+
+		if (search.trim().equals("")){
+			model.addAttribute("search", "O que pretende pesquisar?");
+		}
+		else {
+			List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(CookbookManager.getInstance().getRecipeVersionSet());
+			List<RecipeVersion> resultSet = new ArrayList<RecipeVersion>();
+						
+			for (int i=0;i<recipes.size();i++){
+				RecipeVersion temp =recipes.get(i).getRecipeLast().match(search);
+				if (temp!=null)
+					resultSet.add(temp);
+			}	
+
+			Collections.sort(resultSet);
+
+			model.addAttribute("search", search + " " + resultSet.size());
+			model.addAttribute("items", resultSet);
+		}
+		
+		
+		CookbookManager.getDefaults(model, "searchClass");
+		
+
+		return "search";
+
+	}
+	 
+	
 	/*
 	 * Listar Receitas - Retorna lista de receitas ordenadas.
 	 */

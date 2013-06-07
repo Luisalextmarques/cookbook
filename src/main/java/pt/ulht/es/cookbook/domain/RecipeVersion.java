@@ -58,6 +58,12 @@ public class RecipeVersion extends RecipeVersion_Base implements Comparable<Reci
 		if (getSolucao().toLowerCase().contains(strPesquisa))
 			return true;
 		
+		for (int i=0;i<getTagCount();i++){
+			if (getTag().get(i).getTag().toLowerCase().contains(strPesquisa))
+				return true;	
+		}
+		
+		
 		return false;
 	}
 }
