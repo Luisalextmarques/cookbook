@@ -69,7 +69,9 @@ public class RecipeController {
 		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
 		
 		for (int i=0;i<recipes.size();i++){
-			recipeLastV.add(recipes.get(i).getRecipeLast().getLastVersion());
+			if(recipes.get(i).hasRecipeLast())
+				recipeLastV.add(recipes.get(i));
+	
 		}
 		
 		
@@ -162,9 +164,11 @@ public class RecipeController {
 		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
 				CookbookManager.getInstance().getRecipeVersionSet());
 		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
-		
+				
 		for (int i=0;i<recipes.size();i++){
-			recipeLastV.add(recipes.get(i).getRecipeLast().getLastVersion());
+			if(recipes.get(i).hasRecipeLast())
+				recipeLastV.add(recipes.get(i));
+	
 		}
 				
 		//recipeLastV.get(0).getRecipe().getExternalId(); 
@@ -203,17 +207,23 @@ public class RecipeController {
 	/*
 	 * Criar objeto Receita ,guardar e reencaminhar para mostragem.
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = "/manageRecipes/editRecipe")
-	public String editRecipe(Model model, String titulo, String problema,
+	@RequestMapping(method = RequestMethod.POST, value = "/manageRecipes/editRecipe/{id}")
+	public String editRecipe(Model model, @PathVariable String id, String titulo, String problema,
 			String solucao, String autor, String classificacoes) {
 
 		CookbookManager.getDefaults(model, "CreateRecipe");
-		System.out.println("XOXA1");
-		Recipe criar = new Recipe(titulo, problema, solucao,
-				autor, classificacoes);
-		System.out.println("XOXA2");
 		
-		return "redirect://recipes/" + criar.getExternalId();
+		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
+		//receita.setLastVersion(null);
+		RecipeVersion criarV = new RecipeVersion(titulo, problema, solucao,
+				autor, classificacoes);
+		criarV.setRecipeLast(receita);
+		receita.addRecipeVersion(criarV);
+		
+
+		
+		
+		return "redirect:/recipes/" + receita.getExternalId();
 
 	}
 
