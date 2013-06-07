@@ -3,6 +3,8 @@ package pt.ulht.es.cookbook.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,10 +60,18 @@ public class RecipeController {
 
 		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
 				CookbookManager.getInstance().getRecipeVersionSet());
+		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
 		
-		Collections.sort(recipes);
+		for (int i=0;i<recipes.size();i++){
+			recipeLastV.add(recipes.get(i).getRecipeLast().getLastVersion());
+		}
+		
+		
+		
+		//recipeLastV.get(0).getRecipe().getExternalId(); 
+		Collections.sort(recipeLastV);
 
-		model.addAttribute("items", recipes);
+		model.addAttribute("items", recipeLastV);
 		// Comuns
 		CookbookManager.getDefaults(model, "recipes");
 		// Fim Comuns
@@ -129,22 +139,39 @@ public class RecipeController {
 	/*
 	 * retornar vista de gestão de receitas
 	 */
-	/*@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes")
+	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes")
 	public String manageRecipes(Model model) {
 		/*
 		 * List<String> values = new ArrayList<String>(); values.add("Ola");
 		 * values.add("Mundo"); model.addAttribute("items", values);
 		 */
-		/*Set<Recipe> recipes = CookbookManager.getInstance().getRecipeSet();
+		/*	
+		Set<Recipe> recipesS = CookbookManager.getInstance().;
 
 		model.addAttribute("items", recipes);
 		// Comuns
 		CookbookManager.getDefaults(model, "manageRecipes");
+		// Fim Comuns*/
+		
+		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
+				CookbookManager.getInstance().getRecipeVersionSet());
+		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
+		
+		for (int i=0;i<recipes.size();i++){
+			recipeLastV.add(recipes.get(i).getRecipeLast().getLastVersion());
+		}
+				
+		//recipeLastV.get(0).getRecipe().getExternalId(); 
+		Collections.sort(recipeLastV);
+
+		model.addAttribute("items", recipeLastV);
+		// Comuns
+		CookbookManager.getDefaults(model, "recipes");
 		// Fim Comuns
-
+		
+		
 		return "manageRecipes";
-	}*/
-
+	}
 	/*
 	 * retornar objeto a editar e reencaminhar para vista de edição.
 	 */
