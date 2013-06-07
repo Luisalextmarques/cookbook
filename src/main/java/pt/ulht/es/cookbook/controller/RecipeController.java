@@ -172,7 +172,7 @@ public class RecipeController {
 
 		model.addAttribute("items", recipeLastV);
 		// Comuns
-		CookbookManager.getDefaults(model, "recipes");
+		CookbookManager.getDefaults(model, "manageRecipes");
 		// Fim Comuns
 		
 		
@@ -208,16 +208,13 @@ public class RecipeController {
 			String solucao, String autor, String classificacoes) {
 
 		CookbookManager.getDefaults(model, "CreateRecipe");
-
+		System.out.println("XOXA1");
 		Recipe criar = new Recipe(titulo, problema, solucao,
 				autor, classificacoes);
+		System.out.println("XOXA2");
 		
-		
-		// model.addAttribute("chave",Data.putReceita(criar));
-		// Tags tag = new Tags(classificacoes, criar);
 		return "redirect://recipes/" + criar.getExternalId();
 
-		 //return "sucessDelRecipe";
 	}
 
 
