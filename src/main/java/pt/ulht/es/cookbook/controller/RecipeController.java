@@ -15,6 +15,7 @@ import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
 import pt.ulht.es.cookbook.domain.RecipeVersion;
+import pt.ulht.es.cookbook.domain.RecipeVersionOrdenacao;
 import pt.ulht.es.cookbook.domain.Tag;
 
 @Controller
@@ -24,34 +25,32 @@ public class RecipeController {
 	public String search(@ModelAttribute("search") String search,
 			BindingResult result, Model model) {
 
-		if (search.trim().equals("")){
+		if (search.trim().equals("")) {
 			model.addAttribute("search", "O que pretende pesquisar?");
-		}
-		else {
-			List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(CookbookManager.getInstance().getRecipeVersionSet());
+		} else {
+			List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
+					CookbookManager.getInstance().getRecipeVersionSet());
 			List<RecipeVersion> resultSet = new ArrayList<RecipeVersion>();
-						
-			for (int i=0;i<recipes.size();i++){
-				RecipeVersion temp =recipes.get(i).getRecipeLast().match(search);
-				if (temp!=null)
+
+			for (int i = 0; i < recipes.size(); i++) {
+				RecipeVersion temp = recipes.get(i).getRecipeLast()
+						.match(search);
+				if (temp != null)
 					resultSet.add(temp);
-			}	
+			}
 
 			Collections.sort(resultSet);
 
 			model.addAttribute("search", search + " " + resultSet.size());
 			model.addAttribute("items", resultSet);
 		}
-		
-		
+
 		CookbookManager.getDefaults(model, "searchClass");
-		
 
 		return "search";
 
 	}
-	 
-	
+
 	/*
 	 * Listar Receitas - Retorna lista de receitas ordenadas.
 	 */
@@ -61,22 +60,28 @@ public class RecipeController {
 		 * List<String> values = new ArrayList<String>(); values.add("Ola");
 		 * values.add("Mundo"); model.addAttribute("items", values);
 		 */
-		//List<Recipe> recipes = new ArrayList<Recipe>(
-			//	CookbookManager.getInstance().);
+		// List<Recipe> recipes = new ArrayList<Recipe>(
+		// CookbookManager.getInstance().);
 
 		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
 				CookbookManager.getInstance().getRecipeVersionSet());
 		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
+		//long idRecipe = 0;
+		//int myId = 0;
 		
-		for (int i=0;i<recipes.size();i++){
-			if(recipes.get(i).hasRecipeLast())
-				recipeLastV.add(recipes.get(i));
-	
+		for (int i = 0; i < recipes.size(); i++) {
+			// if(recipes.get(i).hasRecipeLast())
+
+			/*if (idRecipe == recipeLastV.get(i).getOid()) {
+				idRecipe = recipeLastV.get(i).getOid();
+				myId++;
+			} else
+				myId=0;
+				idRecipe = recipeLastV.get(i).getOid();*/
+			recipeLastV.add(recipes.get(i));
 		}
-		
-		
-		
-		//recipeLastV.get(0).getRecipe().getExternalId(); 
+
+		// recipeLastV.get(0).getRecipe().getExternalId();
 		Collections.sort(recipeLastV);
 
 		model.addAttribute("items", recipeLastV);
@@ -108,14 +113,26 @@ public class RecipeController {
 		// Comuns
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
-		
+
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		RecipeVersion ultimaVersao = receita.getLastVersion();
+		RecipeVersion ultimaVersao = receita.getLastVersion();		
+		
 		
 		if (ultimaVersao != null) {
 			model.addAttribute("items", ultimaVersao);
-			List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance().getTagSet());
-			model.addAttribute("class", lista);
+			//List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance().getTagSet());
+			//model.addAttribute("class", lista);
+			List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
+					CookbookManager.getInstance().getRecipeVersionSet());
+			List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
+			
+			for (int i = 0; i < recipes.size(); i++) {
+				if (recipes.get(i).getOid()==receita.getOid() && (!recipes.get(i).hasRecipeLast()))
+					recipeLastV.add( recipes.get(i));
+			}		
+			
+			model.addAttribute("versoes", recipeLastV);
+			
 			return "detailedRecipe";
 		} else {
 			return "recipeNotFound";
@@ -131,15 +148,14 @@ public class RecipeController {
 
 		CookbookManager.getDefaults(model, "CreateRecipe");
 
-		Recipe criar = new Recipe(titulo, problema, solucao,
-				autor, classificacoes);
-		
-		
+		Recipe criar = new Recipe(titulo, problema, solucao, autor,
+				classificacoes);
+
 		// model.addAttribute("chave",Data.putReceita(criar));
 		// Tags tag = new Tags(classificacoes, criar);
 		return "redirect:/recipes/" + criar.getExternalId();
 
-		 //return "sucessDelRecipe";
+		// return "sucessDelRecipe";
 	}
 
 	// MANAGE RECIPES
@@ -153,35 +169,34 @@ public class RecipeController {
 		 * List<String> values = new ArrayList<String>(); values.add("Ola");
 		 * values.add("Mundo"); model.addAttribute("items", values);
 		 */
-		/*	
-		Set<Recipe> recipesS = CookbookManager.getInstance().;
+		/*
+		 * Set<Recipe> recipesS = CookbookManager.getInstance().;
+		 * 
+		 * model.addAttribute("items", recipes); // Comuns
+		 * CookbookManager.getDefaults(model, "manageRecipes"); // Fim Comuns
+		 */
 
-		model.addAttribute("items", recipes);
-		// Comuns
-		CookbookManager.getDefaults(model, "manageRecipes");
-		// Fim Comuns*/
-		
 		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
 				CookbookManager.getInstance().getRecipeVersionSet());
 		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
-				
-		for (int i=0;i<recipes.size();i++){
-			if(recipes.get(i).hasRecipeLast())
+
+		for (int i = 0; i < recipes.size(); i++) {
+			if (recipes.get(i).hasRecipeLast())
 				recipeLastV.add(recipes.get(i));
-	
+
 		}
-				
-		//recipeLastV.get(0).getRecipe().getExternalId(); 
+
+		// recipeLastV.get(0).getRecipe().getExternalId();
 		Collections.sort(recipeLastV);
 
 		model.addAttribute("items", recipeLastV);
 		// Comuns
 		CookbookManager.getDefaults(model, "manageRecipes");
 		// Fim Comuns
-		
-		
+
 		return "manageRecipes";
 	}
+
 	/*
 	 * retornar objeto a editar e reencaminhar para vista de edição.
 	 */
@@ -190,11 +205,10 @@ public class RecipeController {
 		// Comuns
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
-		
+
 		RecipeVersion receitaAlterar = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		//RecipeVersion ultimaVersao = receita.getLastVersion();
-		
-		
+		// RecipeVersion ultimaVersao = receita.getLastVersion();
+
 		if (receitaAlterar != null) {
 			model.addAttribute("items", receitaAlterar);
 			return "editRecipe";
@@ -202,47 +216,43 @@ public class RecipeController {
 			return "recipeNotFound";
 		}
 	}
-	
 
 	/*
 	 * Criar objeto Receita ,guardar e reencaminhar para mostragem.
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/manageRecipes/editRecipe/{id}")
-	public String editRecipe(Model model, @PathVariable String id, String titulo, String problema,
-			String solucao, String autor, String classificacoes) {
+	public String editRecipe(Model model, @PathVariable String id,
+			String titulo, String problema, String solucao, String autor,
+			String classificacoes) {
 
 		CookbookManager.getDefaults(model, "CreateRecipe");
-		
+
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		//receita.setLastVersion(null);
+		// receita.setLastVersion(null);
 		RecipeVersion criarV = new RecipeVersion(titulo, problema, solucao,
 				autor, classificacoes);
 		criarV.setRecipeLast(receita);
 		receita.addRecipeVersion(criarV);
-		
 
-		
-		
 		return "redirect:/recipes/" + receita.getExternalId();
 
 	}
 
-
-/*
- * retornar objeto a editar e reencaminhar para vista de edição.
- */
-/*
- @RequestMapping(method = RequestMethod.GET, value =
-  "/manageRecipes/del/{id}") public String delRecipe(Model model, @PathVariable
-  String id) {
-  
-  // Comuns CookbookManager.getDefaults(model, ""); // Fim Comuns RecipeVersion
-  receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-  
-  if (receita != null) { receita.delete();
-  CookbookManager.getInstance().removeRecipe(receita);
-  model.addAttribute("items", receita); return "sucessDelRecipe"; } else {
-  return "recipeNotFound"; } }
-  
- */ 
- }
+	/*
+	 * retornar objeto a editar e reencaminhar para vista de edição.
+	 */
+	/*
+	 * @RequestMapping(method = RequestMethod.GET, value =
+	 * "/manageRecipes/del/{id}") public String delRecipe(Model model,
+	 * @PathVariable String id) {
+	 * 
+	 * // Comuns CookbookManager.getDefaults(model, ""); // Fim Comuns
+	 * RecipeVersion receita = AbstractDomainObject.fromExternalId(id);//
+	 * Data.getReceita(id);
+	 * 
+	 * if (receita != null) { receita.delete();
+	 * CookbookManager.getInstance().removeRecipe(receita);
+	 * model.addAttribute("items", receita); return "sucessDelRecipe"; } else {
+	 * return "recipeNotFound"; } }
+	 */
+}
