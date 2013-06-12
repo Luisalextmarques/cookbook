@@ -2,9 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file = "/WEB-INF/jsp/commons/top.jsp" %>
-<p class="xpto">Titulo: <a href="#">${items.titulo} | Data: ${items.getDataCriacao()}</a></p>
-				<h2 class="title">Titulo: </h2><h3 class="title"><a href="#">${items.titulo} | Data: ${items.getDataCriacao()}</a></h3>
-				
+<!--<p class="xpto">Titulo: <a href="#">${items.titulo}
+ Data: ${items.getDataCriacao()}</a></p>
+				<h2 class="title">Titulo: </h2><h3 class="title"><a href="#">${items.titulo} | Data: ${items.getDataCriacao()}</a></h3>-->
+<p	class="xpto">Titulo  <a	class="xpto">${items.titulo}</a></p>  			
 <h3 class="title">Problema</h3> 
 <h4>${items.problema} </h4>
 <!--<h3>Solução</h3>
