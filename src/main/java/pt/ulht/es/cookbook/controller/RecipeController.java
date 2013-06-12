@@ -15,7 +15,6 @@ import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
 import pt.ulht.es.cookbook.domain.RecipeVersion;
-import pt.ulht.es.cookbook.domain.RecipeVersionOrdenacao;
 import pt.ulht.es.cookbook.domain.Tag;
 
 @Controller
@@ -66,19 +65,12 @@ public class RecipeController {
 		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
 				CookbookManager.getInstance().getRecipeVersionSet());
 		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
-		//long idRecipe = 0;
-		//int myId = 0;
-		
-		for (int i = 0; i < recipes.size(); i++) {
-			// if(recipes.get(i).hasRecipeLast())
+		// long idRecipe = 0;
+		// int myId = 0;
 
-			/*if (idRecipe == recipeLastV.get(i).getOid()) {
-				idRecipe = recipeLastV.get(i).getOid();
-				myId++;
-			} else
-				myId=0;
-				idRecipe = recipeLastV.get(i).getOid();*/
-			recipeLastV.add(recipes.get(i));
+		for (int i = 0; i < recipes.size(); i++) {
+			if (recipes.get(i).hasRecipeLast())
+				recipeLastV.add(recipes.get(i));
 		}
 
 		// recipeLastV.get(0).getRecipe().getExternalId();
@@ -115,24 +107,29 @@ public class RecipeController {
 		// Fim Comuns
 
 		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		RecipeVersion ultimaVersao = receita.getLastVersion();		
-		
-		
+		RecipeVersion ultimaVersao = receita.getLastVersion();
+
 		if (ultimaVersao != null) {
 			model.addAttribute("items", ultimaVersao);
-			//List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance().getTagSet());
-			//model.addAttribute("class", lista);
+
+			List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance()
+					.getTagSet());
+			model.addAttribute("class", lista);
+
 			List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
 					CookbookManager.getInstance().getRecipeVersionSet());
+
 			List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
-			
+
 			for (int i = 0; i < recipes.size(); i++) {
-				if (recipes.get(i).getOid()==receita.getOid() && (!recipes.get(i).hasRecipeLast()))
-					recipeLastV.add( recipes.get(i));
-			}		
-			
+				if (recipes.get(i).getRecipe().getOid() == receita.getOid()
+						&& (!recipes.get(i).hasRecipeLast())) {
+					recipeLastV.add(recipes.get(i));
+				}
+			}
+
 			model.addAttribute("versoes", recipeLastV);
-			
+
 			return "detailedRecipe";
 		} else {
 			return "recipeNotFound";
@@ -231,6 +228,7 @@ public class RecipeController {
 		// receita.setLastVersion(null);
 		RecipeVersion criarV = new RecipeVersion(titulo, problema, solucao,
 				autor, classificacoes);
+		criarV.tags(classificacoes);
 		criarV.setRecipeLast(receita);
 		receita.addRecipeVersion(criarV);
 
@@ -241,18 +239,27 @@ public class RecipeController {
 	/*
 	 * retornar objeto a editar e reencaminhar para vista de edição.
 	 */
-	/*
-	 * @RequestMapping(method = RequestMethod.GET, value =
-	 * "/manageRecipes/del/{id}") public String delRecipe(Model model,
-	 * @PathVariable String id) {
-	 * 
-	 * // Comuns CookbookManager.getDefaults(model, ""); // Fim Comuns
-	 * RecipeVersion receita = AbstractDomainObject.fromExternalId(id);//
-	 * Data.getReceita(id);
-	 * 
-	 * if (receita != null) { receita.delete();
-	 * CookbookManager.getInstance().removeRecipe(receita);
-	 * model.addAttribute("items", receita); return "sucessDelRecipe"; } else {
-	 * return "recipeNotFound"; } }
-	 */
+
+	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes/del/{id}")
+	public String delRecipe(Model model, @PathVariable String id) {
+
+		// Comuns
+		CookbookManager.getDefaults(model, "");
+		
+		//Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
+		RecipeVersion receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
+		receita.getRecipe().delete();	
+		
+		//Data.getReceita(id);
+
+		if (receita != null) {
+			//receita.delete();
+			CookbookManager.getInstance();
+			model.addAttribute("items", receita);
+			return "sucessDelRecipe";
+		} else {
+			return "recipeNotFound";
+		}
+	}
+
 }

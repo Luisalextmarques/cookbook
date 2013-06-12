@@ -32,6 +32,15 @@ h1 {
 h2 {
 	font-size: 2.8em;
 }
+p.xpto {
+width: 1200px;
+	font-size: 2.8em;
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+	font-weight: 300;
+	color: #7D7764;
+}
 
 h3 {
 	font-size: 1.6em;
@@ -259,16 +268,12 @@ a:hover {
 }
 
 .post .title {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 94247a27e74dbfafe55521fffe07c623e02bfede
+
 	margin: 0px 0px 20px 0px;
 	padding: 0px 0px 10px 0px;
-=======
+
 	margin: 0px 0px 10px 0px;
 	padding: 20px 0px 10px 0px;
->>>>>>> DML
 	border-bottom: 3px solid #E0E1D6;
 	text-shadow: 1px 1px 0px #FFFFFF;
 	font-size: 26px;

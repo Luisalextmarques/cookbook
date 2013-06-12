@@ -1,5 +1,11 @@
 package pt.ulht.es.cookbook.domain;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.taglibs.standard.tag.common.xml.SetTag;
+
 
 
 public class Recipe extends Recipe_Base  {
@@ -24,15 +30,19 @@ public class Recipe extends Recipe_Base  {
 	
 	public RecipeVersion match(String strPesquisa){
 		if (this.getLastVersion().pesquisaTexto(strPesquisa))
-			return this.getLastVersion();
-			
-			
+			return this.getLastVersion();	
 		return null;
-		
-		
 	}
 
-    
+    public void delete(){
+    	
+    	setLastVersion(null);
+		for (RecipeVersion rc :getRecipeVersionSet()){
+			rc.delete();
+			removeRecipeVersion(rc);
+		}		
+		super.deleteDomainObject();
+    }
 	
 	
     

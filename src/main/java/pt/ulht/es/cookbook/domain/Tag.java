@@ -11,8 +11,12 @@ public class Tag extends Tag_Base {
     }
     
     public void delete() {
-    	setTag(null);
-    	super.deleteDomainObject();
+    	setCookbookManager(null);    
+		for (RecipeVersion rc :getRecipeVersionSet()){
+			removeRecipeVersion(rc);	
+		}
+		deleteDomainObject();
+    	
     }
     
 }

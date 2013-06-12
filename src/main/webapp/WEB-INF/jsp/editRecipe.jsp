@@ -4,7 +4,7 @@
 <%@ include file = "/WEB-INF/jsp/commons/top.jsp" %>
 
 
-				<h2 class="title"><a href="#">Edit Recipe "${items.getRecipe().getExternalId()}"</a></h2>
+				<h2 class="title"><a href="#">Edit Recipe <!--"${items.getRecipe().getExternalId()}"--></a></h2>
 				
 				
 
@@ -31,7 +31,7 @@
        <tr>
         <td valign="top">Classificações:</td>
         <td colspan="2">
-          <textarea type="text" name="classificacoes" id='recipe-textarea'><c:forEach var="item" items='${items.getTag()}'>${item.tag} ,</c:forEach></textarea>
+          <textarea type="text" name="classificacoes" id='recipe-textarea'><c:forEach var="item" items='${items.getTag()}'>${item.tag},</c:forEach></textarea>
 		</td>
       </tr>
 	  <tr >

@@ -38,16 +38,16 @@ public class RecipeVersion extends RecipeVersion_Base implements Comparable<Reci
 	
 	
 	public void delete() {
-		setCookbookManager(null);
-		List<Tag> lista =  new ArrayList<Tag>(this.getTag());
-		Iterator<Tag> it = lista.iterator();
-		while (it.hasNext()){
-			it.next().delete();
-		}
 		
-
+		for (Tag tag :getTagSet()){
+			tag.delete();					
+		}
+		setCookbookManager(null);
+		setRecipe(null);
+		setRecipeLast(null);	
 		super.deleteDomainObject();
 	}
+	
 	public boolean pesquisaTexto(String strPesquisa) {
 		if (getTitulo().toLowerCase().contains(strPesquisa))
 			return true;
