@@ -32,10 +32,13 @@ public class RecipeController {
 			List<RecipeVersion> resultSet = new ArrayList<RecipeVersion>();
 
 			for (int i = 0; i < recipes.size(); i++) {
-				RecipeVersion temp = recipes.get(i).getRecipeLast()
-						.match(search);
-				if (temp != null)
-					resultSet.add(temp);
+				if (recipes.get(i).hasRecipeLast()){//Ir ao ultimo
+					RecipeVersion temp = recipes.get(i).getRecipeLast().match(search);
+					if (temp != null)//retornou uma versão, adicionar ao set...
+						resultSet.add(temp);
+					
+				}
+
 			}
 
 			Collections.sort(resultSet);
@@ -246,15 +249,10 @@ public class RecipeController {
 		// Comuns
 		CookbookManager.getDefaults(model, "");
 		
-		//Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		RecipeVersion receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		receita.getRecipe().delete();	
-		
-		//Data.getReceita(id);
+		RecipeVersion receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);		
 
 		if (receita != null) {
-			//receita.delete();
-			CookbookManager.getInstance();
+			receita.getRecipe().delete();				
 			model.addAttribute("items", receita);
 			return "sucessDelRecipe";
 		} else {
