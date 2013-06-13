@@ -16,6 +16,11 @@ import pt.ulht.es.cookbook.domain.CookbookManager;
 @Controller
 public class HomeController {
 
+	/**
+	 * VISTA: Home page.
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public String showHome(Model model) {
 		CookbookManager.getDefaults(model, "home");
@@ -27,6 +32,11 @@ public class HomeController {
 		return "home";
 	}
 
+	/**
+	 * VISTA: About US
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/aboutUs")
 	public String showAboutUs(Model model) {
 

@@ -21,7 +21,7 @@ import pt.ulht.es.cookbook.domain.Tag;
 public class RecipeController {
 
 	/**
-	 * metodo de pesquisa de recipes
+	 * PESQUISA: recipes
 	 * @param search
 	 * @param result
 	 * @param model
@@ -34,18 +34,34 @@ public class RecipeController {
 		if (search.trim().equals("")) {
 			model.addAttribute("search", "O que pretende pesquisar?");
 		} else {
-			List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
-					CookbookManager.getInstance().getRecipeVersionSet());
-			List<RecipeVersion> resultSet = new ArrayList<RecipeVersion>();
+			List<RecipeVersion> resultSet = Recipe.pesquisa(search); //new ArrayList<RecipeVersion>();			
+			Collections.sort(resultSet);
 
-			for (int i = 0; i < recipes.size(); i++) {
-				if (recipes.get(i).hasRecipeLast()){//Ir ao ultimo
-					RecipeVersion temp = recipes.get(i).getRecipeLast().match(search);
-					if (temp != null)//retornou uma versão, adicionar ao set...
-						resultSet.add(temp);					
-				}
-			}
+			model.addAttribute("search", search + " " + resultSet.size());
+			model.addAttribute("items", resultSet);
+		}
 
+		CookbookManager.getDefaults(model, "searchClass");
+
+		return "search";
+
+	}
+	
+	/**
+	 * PESQUISA: recipes interior devido a permitir pesquisar de vários sitios, se fizesse um redirect estragava a cena pq do post...
+	 * @param search
+	 * @param result
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/*/search", method = RequestMethod.POST)
+	public String searchInterior(@ModelAttribute("search") String search,
+			BindingResult result, Model model) {
+
+		if (search.trim().equals("")) {
+			model.addAttribute("search", "O que pretende pesquisar?");
+		} else {
+			List<RecipeVersion> resultSet = Recipe.pesquisa(search); //new ArrayList<RecipeVersion>();			
 			Collections.sort(resultSet);
 
 			model.addAttribute("search", search + " " + resultSet.size());
@@ -59,23 +75,15 @@ public class RecipeController {
 	}
 
 	/**
-	 * Listar Receitas - Retorna lista de receitas ordenadas.
+	 * LISTAR: Listar Receitas - Retorna lista de receitas ordenadas.
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipes")
 	public String listRecipes(Model model) {
 
-		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
-				CookbookManager.getInstance().getRecipeVersionSet());
-		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
-
-		for (int i = 0; i < recipes.size(); i++) {
-			if (recipes.get(i).hasRecipeLast())
-				recipeLastV.add(recipes.get(i));
-		}
-
+		List<RecipeVersion> recipeLastV = Recipe.recipeLista();
 		Collections.sort(recipeLastV);
-
 		model.addAttribute("items", recipeLastV);
+		
 		// Comuns
 		CookbookManager.getDefaults(model, "recipes");
 		// Fim Comuns
@@ -84,7 +92,7 @@ public class RecipeController {
 	}
 
 	/**
-	 * Mostrar Receita detalhada
+	 * LISTAR: Mostrar Receita detalhada
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipes/{id}")
 	public String showRecipe(Model model, @PathVariable String id) {
@@ -124,7 +132,7 @@ public class RecipeController {
 	}
 	
 	/**
-	 * Vista de criação de receita
+	 * CRIAR: Vista de criação de receita
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/createRecipe")
 	public String createRecipes(Model model) {
@@ -138,7 +146,7 @@ public class RecipeController {
 
 
 	/**
-	 * Criar objeto Receita ,guardar e reencaminhar para mostragem.
+	 * CRIAR: Criar objeto Receita ,guardar e reencaminhar para mostragem.
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createRecipe")
 	public String createRecipe(Model model, String titulo, String problema,
@@ -156,25 +164,16 @@ public class RecipeController {
 		// return "sucessDelRecipe";
 	}
 
-	// MANAGE RECIPES
 
 	/**
-	 * retornar vista de gestão de receitas
+	 * EDITAR: retornar vista de gestão de receitas
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes")
 	public String manageRecipes(Model model) {
 
-		List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
-				CookbookManager.getInstance().getRecipeVersionSet());
-		List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
-
-		for (int i = 0; i < recipes.size(); i++) {
-			if (recipes.get(i).hasRecipeLast())
-				recipeLastV.add(recipes.get(i));
-		}
-
+		List<RecipeVersion> recipeLastV = Recipe.recipeLista();
 		Collections.sort(recipeLastV);
-
+		
 		model.addAttribute("items", recipeLastV);
 		// Comuns
 		CookbookManager.getDefaults(model, "manageRecipes");
@@ -185,7 +184,7 @@ public class RecipeController {
 
 	/**
 	 * 
-	 * retornar objeto a editar e reencaminhar para vista de edição.
+	 * EDITAR: retornar objeto a editar e reencaminhar para vista de edição.
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes/{id}")
 	public String editRecipe(Model model, @PathVariable String id) {
@@ -206,7 +205,7 @@ public class RecipeController {
 
 	/**
 	 * 
-	 * Criar objeto RecipeVersion ,guardar e reencaminhar para mostragem.
+	 * EDITAR: Criar objeto RecipeVersion ,guardar e reencaminhar para mostragem.
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/manageRecipes/editRecipe/{id}")
 	public String editRecipe(Model model, @PathVariable String id,
@@ -228,7 +227,7 @@ public class RecipeController {
 
 	/**
 	 * 
-	 * retornar objeto a editar e reencaminhar para vista de edição.
+	 * APAGAR: retornar objeto a apagar e reencaminhar para vista de registo apagado.
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/manageRecipes/del/{id}")
 	public String delRecipe(Model model, @PathVariable String id) {
