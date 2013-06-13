@@ -25,7 +25,7 @@ public class Recipe extends Recipe_Base {
 	}
 
 	public RecipeVersion match(String strPesquisa) {
-		if (this.getLastVersion().pesquisaTexto(strPesquisa))
+		if (this.getLastVersion().pesquisaTexto(strPesquisa.toLowerCase()))
 			return this.getLastVersion();
 		return null;
 	}
