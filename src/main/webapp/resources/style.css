@@ -276,7 +276,7 @@ a:hover {
 
 #content {
 	float: left;
-	/*width: 852px;*/
+	width: 1200px;
 	padding: 0px 0px 0px 0px;
 }
 
@@ -642,7 +642,11 @@ a:hover {
 }
 
 .tabela td{
-	width:500px;
+	width:1000px;
 	/*background: #B9B9B9;*/
 }
 
+td.col1{
+	width:120px;
+	/*background: #B9B9B9;*/
+}
