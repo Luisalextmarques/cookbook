@@ -40,7 +40,6 @@ public class RecipeVersion extends RecipeVersion_Base implements
 		for (int i = 0; i < arr.length; i++) {
 			if (!arr[i].trim().equals(""))// So adiciona cenas exceto em branco
 				addTag(new Tag(arr[i].trim()));
-
 		}
 
 	}
