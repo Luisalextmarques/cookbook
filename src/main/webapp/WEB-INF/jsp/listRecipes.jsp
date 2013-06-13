@@ -6,7 +6,8 @@
 				<ul>
 					<c:forEach var="item" items='${items}'>
 						<li><p class="listTitulo">Titulo: <a href="/recipes/${item.getRecipe().getExternalId()}">${item.titulo} </p></a>
-						${item.problema}
+						P:${item.problema}
+						<br>S:${item.solucao}
 						<br>${item.getDataCriacao()}
 						<br>${item.autor}
 						</li>
