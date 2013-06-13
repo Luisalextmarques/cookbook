@@ -5,8 +5,10 @@
 				<h2 class="title"><a href="#">Receitas</a></h2>
 				<ul>
 					<c:forEach var="item" items='${items}'>
-						<li>Receita: <a href="/recipes/${item.getRecipe().getExternalId()}">${item.titulo} </a>
-						<br>${item.problema}
+						<li><p class="listTitulo">Titulo: <a href="/recipes/${item.getRecipe().getExternalId()}">${item.titulo} </p></a>
+						${item.problema}
+						<br>${item.getDataCriacao()}
+						<br>${item.autor}
 						</li>
 						
 					</c:forEach>

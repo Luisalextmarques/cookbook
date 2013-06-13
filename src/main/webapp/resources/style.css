@@ -33,18 +33,33 @@ h2 {
 	font-size: 2.8em;
 }
 p.xpto {
-width: 1200px;
+	width: 1200px;
 	font-size: 2.8em;
 	margin: 0;
 	padding: 0;
 	text-transform: uppercase;
 	font-weight: 300;
-	/*color:#7d7764;*/
-	font-color: #7D7764;
+	color:black;
+	
+}
+p.data{
+	margin: 0;
+	padding: 0;
+
 }
 
+p.listTitulo{
+font-size: 1.2em;
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+	color:black;
+	}
+
 h3 {
-	font-size: 1.6em;
+	margin: 0;
+	padding: 0;
+	font-size: 1.4em;
 }
 
 h4 {
@@ -55,6 +70,7 @@ p, ul, ol {
 	margin-top: 0;
 	line-height: 180%;
 }
+
 
 ul, ol {
 }
@@ -260,7 +276,7 @@ a:hover {
 
 #content {
 	float: left;
-	width: 852px;
+	/*width: 852px;*/
 	padding: 0px 0px 0px 0px;
 }
 
@@ -276,7 +292,7 @@ a:hover {
 	margin: 0px 0px 10px 0px;
 	padding: 20px 0px 10px 0px;
 	border-bottom: 3px solid #E0E1D6;
-	text-shadow: 1px 1px 0px #FFFFFF;
+	/*text-shadow: 1px 1px 0px #FFFFFF;*/
 	font-size: 26px;
 	color: #373737;
 }

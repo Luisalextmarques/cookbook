@@ -2,26 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file = "/WEB-INF/jsp/commons/top.jsp" %>
-<!--<p class="xpto">Titulo: <a href="#">${items.titulo}
- Data: ${items.getDataCriacao()}</a></p>
-				<h2 class="title">Titulo: </h2><h3 class="title"><a href="#">${items.titulo} | Data: ${items.getDataCriacao()}</a></h3>-->
-<p	class="xpto">Titulo  <a	class="xpto">${items.titulo}</a></p>  			
+<p	class="xpto">Titulo  <a	class="xpto">${items.titulo}</a></p>
+<p 	class="data">Data:  	${items.getDataCriacao()}</p>	
 <h3 class="title">Problema</h3> 
 <h4>${items.problema} </h4>
-<!--<h3>Solução</h3>
-<h4> ${items.solucao} </h4>
-
-<!--<h3>Classificações</h3>
-	<c:forEach var="item" items='${items.getTag()}'>
-		<h4><a href="#">${item.tag} </a></h4>
-	</c:forEach>
-</ul>	
-
-
-<h3>Autor</h3>
-<h4> ${items.autor} </h4>
-
-<br>-->
 <h3 class="title">Solução</h3>
 <h4 > ${items.solucao} </h4>
 <br>
@@ -31,7 +15,7 @@
 <table width='100%' align="left" border='0' >
 <h3 class="title">Classificações</h3>
       		<tr>	
-			<td valign="top"  width='2%'>Tags:</td>
+			<td valign="top"  width='2%'></td>
 				<td>
 				<ul>
 					<c:forEach var="item" items='${items.getTag()}'>
@@ -45,12 +29,17 @@
 
 <table width='100%' align="left" border='0' >
 <h3 class="title">Versões</h3>
+				<li><ul>Versão Actual<br> <a href="#">${items.titulo} </a>| ${items.getDataCriacao()}
+				<br>${items.problema}
+				</li>
+						
       		<tr>	
-			<td valign="top"  width='2%'>Versão:</td>
+			<td valign="top"  width='2%'></td>
 				<td>		
 								<ul>
+						
 					<c:forEach var="item" items='${versoes}'>
-						<li>Receita: <a href="#">${item.titulo} </a>| ${item.getDataCriacao()}
+						<li><a href="#">${item.titulo} </a>| ${item.getDataCriacao()}
 						<br>${item.problema}
 						</li>
 						
