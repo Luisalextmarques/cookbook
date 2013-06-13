@@ -2,6 +2,12 @@ package pt.ulht.es.cookbook.domain;
 
 import org.joda.time.DateTime;
 
+/**
+ * Classe de RecipeVersion
+ * @author lm
+ * @author bcs
+ *
+ */
 public class RecipeVersion extends RecipeVersion_Base implements
 		Comparable<RecipeVersion> {
 
