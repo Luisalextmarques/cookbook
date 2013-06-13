@@ -6,12 +6,14 @@
 				<br>
 				
 				<br>
-				<ul>
 					<c:forEach var="item" items='${items}'>
-						<li>Receita: <a href="/recipes/${item.getRecipe().getExternalId()}">${item.titulo} </a>
-						<br>${item.problema}
-						</li>
-						
+						<p class="listTitulo"><a class="list"  href="/recipes/${item.getRecipe().getExternalId()}">${item.titulo} | ${item.getDataCriacao()} </a></p>
+						<p class="listProblema">${item.problema}</p>
+						<p class="listSolucao">${item.solucao}</p>
+						<p class="listAutor">${item.autor}</p>
+						<c:forEach var="tag" items='${item.getTag()}'><a class="list"  href="/search/${tag.tag}">${tag.tag}</a> 				
+						</c:forEach>
+						<br>
+						<br>
 					</c:forEach>
-				</ul>
 <%@ include file = "/WEB-INF/jsp/commons/bottom.jsp" %>

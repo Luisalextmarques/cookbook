@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import pt.ist.fenixframework.project.exception.FenixFrameworkProjectException;
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
@@ -30,6 +31,26 @@ public class RecipeController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String search(@ModelAttribute("search") String search,
 			BindingResult result, Model model) {
+
+		if (search.trim().equals("")) {
+			model.addAttribute("search", "O que pretende pesquisar?");
+		} else {
+			List<RecipeVersion> resultSet = Recipe.pesquisa(search); //new ArrayList<RecipeVersion>();			
+			Collections.sort(resultSet);
+
+			model.addAttribute("search", search + " " + resultSet.size());
+			model.addAttribute("items", resultSet);
+		}
+
+		CookbookManager.getDefaults(model, "searchClass");
+
+		return "search";
+
+	}
+	
+
+	@RequestMapping(value = "/search/{search}", method = RequestMethod.GET)
+	public String searchT(Model model, @PathVariable String search) {
 
 		if (search.trim().equals("")) {
 			model.addAttribute("search", "O que pretende pesquisar?");
@@ -100,35 +121,45 @@ public class RecipeController {
 		// Comuns
 		CookbookManager.getDefaults(model, "");
 		// Fim Comuns
+		try{
+			Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);	
+			RecipeVersion ultimaVersao = receita.getLastVersion();
+			
+			if (ultimaVersao != null) {
+				model.addAttribute("items", ultimaVersao);
 
-		Recipe receita = AbstractDomainObject.fromExternalId(id);// Data.getReceita(id);
-		RecipeVersion ultimaVersao = receita.getLastVersion();
+				List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance()
+						.getTagSet());
+				model.addAttribute("class", lista);
 
-		if (ultimaVersao != null) {
-			model.addAttribute("items", ultimaVersao);
+				List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
+						CookbookManager.getInstance().getRecipeVersionSet());
 
-			List<Tag> lista = new ArrayList<Tag>(CookbookManager.getInstance()
-					.getTagSet());
-			model.addAttribute("class", lista);
+				List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
 
-			List<RecipeVersion> recipes = new ArrayList<RecipeVersion>(
-					CookbookManager.getInstance().getRecipeVersionSet());
-
-			List<RecipeVersion> recipeLastV = new ArrayList<RecipeVersion>();
-
-			for (int i = 0; i < recipes.size(); i++) {
-				if (recipes.get(i).getRecipe().getOid() == receita.getOid()
-						&& (!recipes.get(i).hasRecipeLast())) {
-					recipeLastV.add(recipes.get(i));
+				for (int i = 0; i < recipes.size(); i++) {
+					if (recipes.get(i).getRecipe().getOid() == receita.getOid()
+							&& (!recipes.get(i).hasRecipeLast())) {
+						recipeLastV.add(recipes.get(i));
+					}
 				}
-			}
 
-			model.addAttribute("versoes", recipeLastV);
+				model.addAttribute("versoes", recipeLastV);
 
-			return "detailedRecipe";
-		} else {
+				return "detailedRecipe";
+			} else 
+				return "recipeNotFound";
+						
+		}
+		catch (Exception e){
 			return "recipeNotFound";
 		}
+		
+			
+		
+		
+
+		
 	}
 	
 	/**

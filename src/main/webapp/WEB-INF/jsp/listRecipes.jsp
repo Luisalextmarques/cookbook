@@ -3,15 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file = "/WEB-INF/jsp/commons/top.jsp" %>
 				<h2 class="title"><a href="#">Receitas</a></h2>
-				<ul>
+				
 					<c:forEach var="item" items='${items}'>
-						<li><p class="listTitulo">Titulo: <a href="/recipes/${item.getRecipe().getExternalId()}">${item.titulo} </p></a>
-						P:${item.problema}
-						<br>S:${item.solucao}
-						<br>${item.getDataCriacao()}
-						<br>${item.autor}
-						</li>
-						
+						<p class="listTitulo"><a class="list"  href="/recipes/${item.getRecipe().getExternalId()}">${item.titulo} | ${item.getDataCriacao()} </a></p>
+						<p class="listProblema">${item.problema}</p>
+						<p class="listSolucao">${item.solucao}</p>
+						<p class="listAutor">${item.autor}</p>
+						<c:forEach var="tag" items='${item.getTag()}'><a class="list"  href="/search/${tag.tag}">${tag.tag}</a> 				
+						</c:forEach>
+						<br>
+						<br>
 					</c:forEach>
-				</ul>
+				
 <%@ include file = "/WEB-INF/jsp/commons/bottom.jsp" %>
