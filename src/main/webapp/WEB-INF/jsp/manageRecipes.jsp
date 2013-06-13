@@ -9,7 +9,7 @@
 						- <a href="/manageRecipes/del/${item.getExternalId()}">Apagar Receita</a>
 						<br>${item.problema}
 						</li>
-						
+						<br>
 					</c:forEach>
 				</ul>
 <%@ include file = "/WEB-INF/jsp/commons/bottom.jsp" %>
